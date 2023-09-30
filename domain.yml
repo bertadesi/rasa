@@ -1,0 +1,146 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - self_introduction
+  - health
+  - general
+  - games
+  - jokes
+  - inform
+  - asksymptom
+  - anxietylevel
+  - curhat
+  - formdata
+  - batalformdata
+  - submitformdata
+  - dass
+  - gad7
+  - stait
+  - mulaidass
+  - dass1
+  - dass2
+  - dass3
+  - dass4
+  - dass5
+  - dass6
+  - dass7
+  - dass8
+  - dass9
+  - dass10
+  - dass11
+  - dass12
+  - dass13
+  - dass14
+  
+
+entities:
+  - name
+  - age
+  - job
+  - symptom
+  
+slots:
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+  age:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: age
+  job:
+    type: text
+    mappings:
+       - type: from_entity
+         entity: job
+  symptom:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: symptom
+  
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+    image: "https://imgv3.fotor.com/images/blog-richtext-image/part-blurry-image.jpg"
+    
+      
+
+  utter_welcoming_up:
+  - text: "Selamat datang:"
+    image: "https://imgv3.fotor.com/images/blog-richtext-image/part-blurry-image.jpg"
+    
+  utter_cheer_up:
+  - text: "Its Okay"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+  
+  utter_ask_name:
+    - text: "namanya siapa ya?"
+  utter_ask_age:
+    - text: "ummurnya berapa?"
+  utter_ask_job:
+    - text: "apa pekerjaanmu (pilih salah satu: pelajar, pekerja, penggangguran dsb)?"
+  utter_ask_symptom:
+    - text: "ada keluhan hari ini soal kesehatan mentalmu?"
+  
+
+  
+actions:
+ - action_hello_world
+ - action_health_greet
+ - action_intent_general
+ - action_intent_games
+ - action_intent_jokes
+ - action_intent_inform
+ - action_intent_anxietylevel
+ - action_intent_curhat
+ - action_intent_formdata
+ - action_intent_submitformdata
+ - action_intent_batalformdata
+ - action_intent_dass
+ - action_intent_gad7
+ - action_intent_stait
+ - action_intent_great
+ - action_intent_sad
+ - action_intent_dass1
+ - action_intent_dass2
+ - action_intent_dass3
+ - action_intent_dass4
+ - action_intent_dass5
+ - action_intent_dass6
+ - action_intent_dass7
+ - action_intent_dass8
+ - action_intent_dass9
+ - action_intent_dass10
+ - action_intent_dass11
+ - action_intent_dass12
+ - action_intent_dass13
+ - action_intent_dass14
+ - action_intent_dassClose
+ 
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
+
