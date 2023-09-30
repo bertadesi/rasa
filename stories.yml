@@ -1,0 +1,162 @@
+version: "2.0"
+
+stories:
+
+- story: welcome path
+  steps:
+  - intent: greet
+  - action: action_hello_world
+- story: check topic health 
+  steps:
+  - intent: health
+  - action: action_health_greet
+- story: check topic general 
+  steps:
+  - intent: general
+  - action: action_intent_general 
+- story: check topic games 
+  steps: 
+  - intent: games
+  - action: action_intent_games
+- story: check topic jokes
+  steps: 
+  - intent: jokes
+  - action: action_intent_jokes
+- story: check anxiety level
+  steps: 
+  - intent: anxietylevel
+  - action: action_intent_anxietylevel
+  
+- story: cek level DASS
+  steps: 
+  - intent: dass
+  - action: action_intent_dass
+  
+- story: DASS 1
+  steps: 
+  - intent: mulaidass
+  - action: action_intent_dass1
+  
+- story: DASS 2
+  steps: 
+  - intent: dass1
+  - action: action_intent_dass2
+  
+- story: DASS 3
+  steps: 
+  - intent: dass2
+  - action: action_intent_dass3
+    
+- story: DASS 4
+  steps: 
+  - intent: dass3
+  - action: action_intent_dass4
+
+- story: DASS 5
+  steps: 
+  - intent: dass4
+  - action: action_intent_dass5
+
+- story: DASS 6
+  steps: 
+  - intent: dass5
+  - action: action_intent_dass6
+
+- story: DASS 7
+  steps: 
+  - intent: dass6
+  - action: action_intent_dass7
+
+- story: DASS 8
+  steps: 
+  - intent: dass7
+  - action: action_intent_dass8
+
+- story: DASS 9
+  steps: 
+  - intent: dass8
+  - action: action_intent_dass9
+
+- story: DASS 10
+  steps: 
+  - intent: dass9
+  - action: action_intent_dass10
+
+- story: DASS 11
+  steps: 
+  - intent: dass10
+  - action: action_intent_dass11
+
+- story: DASS 12
+  steps: 
+  - intent: dass11
+  - action: action_intent_dass12
+
+- story: DASS 13
+  steps: 
+  - intent: dass12
+  - action: action_intent_dass13
+
+- story: DASS 14
+  steps: 
+  - intent: dass13
+  - action: action_intent_dass14
+
+- story: End DASS
+  steps: 
+  - intent: dass14
+  - action: action_intent_dassClose  
+
+  
+- story: cek level GAD-7
+  steps: 
+  - intent: gad7
+  - action: action_intent_gad7
+  
+- story: cek level stait/stais
+  steps: 
+  - intent: stait
+  - action: action_intent_stait
+  
+
+- story: cek curhat seneng
+  steps: 
+  - intent: mood_great
+  - action: action_intent_great
+
+
+
+- story: cek curhat sedih
+  steps: 
+  - intent: mood_unhappy
+  - action: action_intent_sad
+
+  
+- story: check curhat 
+  steps: 
+  - intent: curhat
+  - action: action_intent_curhat
+
+  
+- story: get information
+  steps:
+  - intent: inform
+  - action: action_intent_inform
+  
+- story: user form data
+  steps:
+  - intent: formdata
+  - action: action_intent_formdata
+ 
+- story: submit form data
+  steps:
+  - intent: submitformdata
+  - action: action_intent_submitformdata  
+
+- story: batal form data
+  steps:
+  - intent: batalformdata
+  - action: action_intent_batalformdata 
+     
+
+
