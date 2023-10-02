@@ -72,8 +72,27 @@ message_dass_13='Apakah kamu merasa khawatir dengan situasi saat diri Anda mungk
 message_dass_14='Apakah kamu sering merasakan gemetar?'
 message_confirmation='Okay, sepertinya kita harus ngobrol lebih dalam nih. Kalo boleh tahu apa yang kamu rasakan sekarang?'
 message_dass_Close='Wow, terima kasih sudah berbincang-bincang. Saya lihat level cemas Anda masih dalam skala normal. Selamat beraktivitas dan tetap semangat'
-
-
+message_intro_gad='GAD-7 (Generalized Anxiety Disorder 7) adalah sebuah alat penilaian yang digunakan untuk mengukur tingkat kecemasan pada seseorang. Yuk boleh dicoba ya... selama 2 minggu terakhir, seberapa sering kamu terganggu oleh masalah-masalah berikut?'
+message_gad_1='Merasa gelisah, cemas atau tegang'
+message_gad_2='Tidak mampu menghentikan atau mengendalikan rasa khawatir'
+message_gad_3='Terlalu mengkhawatirkan berbagai hal'
+message_gad_4='Sulit untuk santai'
+message_gad_5='Sangat gelisah sehingga sulit duduk diam'
+message_gad_6='Menjadi mudah jengkel atau lekas marah'
+message_gad_7='Merasa takut seolah-olah sesuatu yang mengerikan mungkin terjadi'
+message_gad_Close='Wow, test GAD-7 mu sudah selesai. Saya lihat level cemas Anda masih dalam skala normal. Selamat beraktivitas dan tetap semangat'
+message_intro_stait='STAIT/STAIS 5 merupakan bentuk test kecemasan versi pendek dari Spielberger. Ada 10 jenis pernyataan, silahkan dijawab tanpa berpikir lama yang mendeskripsikan perasaanmu saat ini. Selamat mencoba...'
+message_stait_1='saya merasa kecewa'
+message_stait_2='saya merasa ketakutan'
+message_stait_3='saya merasa cemas'
+message_stait_4='saya merasa gelisah / gugup'
+message_stait_5='saya merasa bingung'
+message_stait_6='Saya merasa masalah bertumpuk hingga sulit untuk mengatasinya'
+message_stait_7='Saya terlalu khawatir tentang sesuatu yang sebenarnya tidak begitu penting.'
+message_stait_8='Beberapa pikiran yang tidak penting muncul dalam pikiran saya dan mengganggu saya.'
+message_stait_9='Saya begitu merasa kecewa sehingga sulit bagi saya untuk melupakan mereka.'
+message_stait_10='Saya merasa kacau atau tegang ketika sesuatu hal mengganggu saya'
+message_stait_Close='Well done! Terima kasih sudah mencoba menjawab semua pertanyaan. Tidak ada yang perlu dikawatirkan, tetap semangat dan jaga kesehatan..'
 
 def insertMeasurement(sender_id,code_measurement):
    
@@ -114,8 +133,10 @@ def insertMeasurement(sender_id,code_measurement):
    
     finally:
                # Close the database connection
-               cursor.close()
-               conn.close()
+              if 'cursor' in locals():
+                 cursor.close()
+              if 'conn' in locals():
+                 conn.close()
 
       
     return None
@@ -169,9 +190,9 @@ def ValidateMeasurement(sender_id,code_measurement):
                 query2 = " and code_measurement like '%"+  code+"%'"               
        
         elif 'gad' in code_measurement:
-           
+                code = code_measurement[:-1]   
                 query1="SELECT count(*) FROM measurement WHERE type_measurement='GAD7'" 
-                query2 = " and code_measurement ="+  code_measurement    
+                query2 = " and code_measurement like '%"+  code+"%'"   
         else:
        
                 
@@ -282,7 +303,7 @@ class ActionHelloWorld(Action):
            
             dispatcher.utter_message(text=message,buttons=[
                         {"title": "Ya", "payload": "/health"},
-                        {"title": "Tidak", "payload": "tidak"}
+                        {"title": "Tidak", "payload": "/general"}
                         
                     ])
 
@@ -324,8 +345,11 @@ class ActionHelloWorld(Action):
         
             finally:
                     # Close the database connection
-                    cursor.close()
-                    conn.close()
+                
+                    if 'cursor' in locals():
+                       cursor.close()
+                    if 'conn' in locals():
+                       conn.close()
 
             return username
         else:
@@ -367,7 +391,8 @@ class ActionIntentGeneral(Action):
     
         finally:
                 # Close the database connection
-                cursor.close()
+                if 'cursor' in locals():
+                   cursor.close()
                
 
         if response.status_code == 200:
@@ -612,7 +637,7 @@ class ActionAnxietyLevel(Action):
           
           dispatcher.utter_message(text=message_anxiety,buttons=[
                       {"title": "DASS", "payload": "/dass"},
-                      {"title": "GAD-7", "payload": "/gad-7"},
+                      {"title": "GAD-7", "payload": "/gad"},
                       {"title": "STAIT/STAIS-5", "payload": "/stait"}
          #             {"title": "Test Slot", "payload": "/formdata"}
                       
@@ -771,7 +796,7 @@ class ActionDASS6(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -779,7 +804,7 @@ class ActionDASS6(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
               dispatcher.utter_message(text=message_dass_6,buttons=[
@@ -803,7 +828,7 @@ class ActionDASS7(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -811,7 +836,7 @@ class ActionDASS7(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_7,buttons=[
@@ -853,7 +878,7 @@ class ActionDASS9(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -861,7 +886,7 @@ class ActionDASS9(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_9,buttons=[
@@ -883,7 +908,7 @@ class ActionDASS10(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -891,7 +916,7 @@ class ActionDASS10(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_10,buttons=[
@@ -913,7 +938,7 @@ class ActionDASS11(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -921,7 +946,7 @@ class ActionDASS11(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_11,buttons=[
@@ -943,7 +968,7 @@ class ActionDASS12(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -951,7 +976,7 @@ class ActionDASS12(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_12,buttons=[
@@ -975,7 +1000,7 @@ class ActionDASS13(Action):
          
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -983,7 +1008,7 @@ class ActionDASS13(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_13,buttons=[
@@ -1007,7 +1032,7 @@ class ActionDASS14(Action):
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
           
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)   
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -1015,7 +1040,7 @@ class ActionDASS14(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_14,buttons=[
@@ -1038,7 +1063,7 @@ class ActionDASSClose(Action):
           message_id = tracker.latest_message.get("text") 
           sender_id =  tracker.sender_id
           
-          cekTotalScore = countMeasurement(sender_id, message_id)
+          cekTotalScore = int(countMeasurement(sender_id, message_id))
           cekCurrent = ValidateMeasurement(sender_id, message_id)
           if cekCurrent == 0:
               insertMeasurement(sender_id,message_id)
@@ -1046,8 +1071,494 @@ class ActionDASSClose(Action):
               deleteMeasurement(sender_id, message_id)
               insertMeasurement(sender_id,message_id)
           
-          if cekTotalScore >= 14:
+          if cekTotalScore >= "14.00":
              dispatcher.utter_message(text=message_confirmation) 
           else:
              dispatcher.utter_message(text=message_dass_Close)             
-             
+
+class ActionGAD(Action):
+    def name(self) -> Text:
+        return "action_intent_gad"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          
+          dispatcher.utter_message(text=message_intro_gad,buttons=[
+                      {"title": "Mulai", "payload": "/mulaigad"},
+                      {"title": "Batal", "payload": "/batal"}
+                                            
+                      
+                  ])          
+          
+class ActionGAD1(Action):
+    def name(self) -> Text:
+        return "action_intent_gad1"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          
+          dispatcher.utter_message(text=message_gad_1,buttons=[
+                      {"title": "Tidak pernah", "payload": "gadd10"},
+                      {"title": "Beberapa hari", "payload": "gadd11"},
+                      {"title": "lebih dari seminggu", "payload": "gadd12"},
+                      {"title": "Hampir setiap hari", "payload": "gadd13"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD2(Action):
+    def name(self) -> Text:
+        return "action_intent_gad2"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_gad_2,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd20"},
+                     {"title": "Beberapa hari", "payload": "gadd21"},
+                     {"title": "lebih dari seminggu", "payload": "gadd22"},
+                     {"title": "Hampir setiap hari", "payload": "gadd23"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD3(Action):
+    def name(self) -> Text:
+        return "action_intent_gad3"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_gad_3,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd30"},
+                     {"title": "Beberapa hari", "payload": "gadd31"},
+                     {"title": "lebih dari seminggu", "payload": "gadd32"},
+                     {"title": "Hampir setiap hari", "payload": "gadd33"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD4(Action):
+    def name(self) -> Text:
+        return "action_intent_gad4"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_gad_4,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd40"},
+                     {"title": "Beberapa hari", "payload": "gadd41"},
+                     {"title": "lebih dari seminggu", "payload": "gadd42"},
+                     {"title": "Hampir setiap hari", "payload": "gadd43"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD5(Action):
+    def name(self) -> Text:
+        return "action_intent_gad5"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          if cekTotalScore >= "10.00":
+              dispatcher.utter_message(text=message_confirmation) 
+          else:
+               
+           dispatcher.utter_message(text=message_gad_5,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd50"},
+                     {"title": "Beberapa hari", "payload": "gadd51"},
+                     {"title": "lebih dari seminggu", "payload": "gadd52"},
+                     {"title": "Hampir setiap hari", "payload": "gadd53"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD6(Action):
+    def name(self) -> Text:
+        return "action_intent_gad6"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          if cekTotalScore >= "10.00":
+               dispatcher.utter_message(text=message_confirmation) 
+          else:    
+               dispatcher.utter_message(text=message_gad_6,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd60"},
+                     {"title": "Beberapa hari", "payload": "gadd61"},
+                     {"title": "lebih dari seminggu", "payload": "gadd62"},
+                     {"title": "Hampir setiap hari", "payload": "gadd63"}
+                                            
+                      
+                  ])  
+          
+class ActionGAD7(Action):
+    def name(self) -> Text:
+        return "action_intent_gad7"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+          if cekTotalScore >= "10.00":
+                dispatcher.utter_message(text=message_confirmation) 
+          else:        
+                dispatcher.utter_message(text=message_gad_7,buttons=[
+                     {"title": "Tidak pernah", "payload": "gadd70"},
+                     {"title": "Beberapa hari", "payload": "gadd71"},
+                     {"title": "lebih dari seminggu", "payload": "gadd72"},
+                     {"title": "Hampir setiap hari", "payload": "gadd73"}
+                                            
+                      
+                  ]) 
+                
+class ActionSTAIT(Action):
+    def name(self) -> Text:
+        return "action_intent_stait"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          
+              dispatcher.utter_message(text=message_intro_stait,buttons=[
+                      {"title": "Mulai", "payload": "/mulaistait"},
+                      {"title": "Batal", "payload": "/batal"}
+                ])      
+ 
+class ActionSTAIT1(Action):
+    def name(self) -> Text:
+        return "action_intent_stait1"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          
+          dispatcher.utter_message(text=message_stait_1,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait11"},
+                      {"title": "Sedikit", "payload": "stait12"},
+                      {"title": "Lumayan", "payload": "stait13"},
+                      {"title": "Sangat", "payload": "stait14"}
+                                            
+                      
+                  ]) 
+
+
+
+class ActionSTAIT2(Action):
+    def name(self) -> Text:
+        return "action_intent_stait2"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_2,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait21"},
+                      {"title": "Sedikit", "payload": "stait22"},
+                      {"title": "Lumayan", "payload": "stait23"},
+                      {"title": "Sangat", "payload": "stait24"}
+                                            
+                      
+                  ])   
+
+class ActionSTAIT3(Action):
+    def name(self) -> Text:
+        return "action_intent_stait3"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_3,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait31"},
+                      {"title": "Sedikit", "payload": "stait32"},
+                      {"title": "Lumayan", "payload": "stait33"},
+                      {"title": "Sangat", "payload": "stait34"}
+                                            
+                      
+                  ])
+
+class ActionSTAIT4(Action):
+    def name(self) -> Text:
+        return "action_intent_stait4"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_4,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait41"},
+                      {"title": "Sedikit", "payload": "stait42"},
+                      {"title": "Lumayan", "payload": "stait43"},
+                      {"title": "Sangat", "payload": "stait44"}
+                                            
+                      
+                  ])  
+
+class ActionSTAIT5(Action):
+    def name(self) -> Text:
+        return "action_intent_stait5"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_5,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait51"},
+                      {"title": "Sedikit", "payload": "stait52"},
+                      {"title": "Lumayan", "payload": "stait53"},
+                      {"title": "Sangat", "payload": "stait54"}
+                                            
+                      
+                  ])  
+
+class ActionSTAIT6(Action):
+    def name(self) -> Text:
+        return "action_intent_stait6"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_6,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait61"},
+                      {"title": "Sedikit", "payload": "stait62"},
+                      {"title": "Lumayan", "payload": "stait63"},
+                      {"title": "Sangat", "payload": "stait64"}
+                                            
+                      
+                  ])  
+
+
+class ActionSTAIT7(Action):
+    def name(self) -> Text:
+        return "action_intent_stait7"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+              
+          dispatcher.utter_message(text=message_stait_7,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait71"},
+                      {"title": "Sedikit", "payload": "stait72"},
+                      {"title": "Lumayan", "payload": "stait73"},
+                      {"title": "Sangat", "payload": "stait74"}
+                                            
+                      
+                  ])                           
+          
+          
+class ActionSTAIT8(Action):
+    def name(self) -> Text:
+        return "action_intent_stait8"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+          if cekTotalScore >= "24.00":
+                dispatcher.utter_message(text=message_confirmation) 
+          else:        
+          
+              
+               dispatcher.utter_message(text=message_stait_8,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait81"},
+                      {"title": "Sedikit", "payload": "stait82"},
+                      {"title": "Lumayan", "payload": "stait83"},
+                      {"title": "Sangat", "payload": "stait84"}
+                                            
+                      
+                  ]) 
+               
+class ActionSTAIT9(Action):
+    def name(self) -> Text:
+        return "action_intent_stait9"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+          if cekTotalScore >= "24.00":
+                dispatcher.utter_message(text=message_confirmation) 
+          else:        
+          
+              
+               dispatcher.utter_message(text=message_stait_9,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait91"},
+                      {"title": "Sedikit", "payload": "stait92"},
+                      {"title": "Lumayan", "payload": "stait93"},
+                      {"title": "Sangat", "payload": "stait94"}
+                                            
+                      
+                  ])   
+
+class ActionSTAIT10(Action):
+    def name(self) -> Text:
+        return "action_intent_stait10"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          cekTotalScore = countMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+          if cekTotalScore >= "24.00":
+                dispatcher.utter_message(text=message_confirmation) 
+          else:        
+          
+              
+               dispatcher.utter_message(text=message_stait_10,buttons=[
+                      {"title": "Tidak sama sekali", "payload": "stait101"},
+                      {"title": "Sedikit", "payload": "stait102"},
+                      {"title": "Lumayan", "payload": "stait103"},
+                      {"title": "Sangat", "payload": "stait104"}
+                                            
+                      
+                  ]) 
