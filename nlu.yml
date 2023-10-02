@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 
 nlu:
 - intent: greet
@@ -48,6 +48,7 @@ nlu:
 
 - intent: general
   examples: |
+    - /general
     - tidak
     - tdk
     - emoh
@@ -176,7 +177,6 @@ nlu:
     - dass122
     - dass123
     
-    
 
 - intent: dass13
   examples: |
@@ -193,13 +193,81 @@ nlu:
     - dass143
      
     
-
+- intent: gad
+  examples: |
+    - /GAD
+    - /gad
+    - GAD-7
+    - gad
+    - GAD
     
+    
+- intent: mulaigad
+  examples: |
+    - /mulaigad
+    - mulai gad
+    - start gad
+    
+- intent: gad1
+  examples: |
+    - gadd10
+    - gadd11
+    - gadd12
+    - gadd13
+    
+- intent: gad2
+  examples: |
+    - gadd20
+    - gadd21
+    - gadd22
+    - gadd23
+    
+- intent: gadthree
+  examples: |
+    - /gadd30
+    - /gadd31
+    - /gadd32
+    - /gadd33
+    - gadd30
+    - gadd31
+    - gadd32
+    - gadd33
+    
+- intent: gad3
+  examples: |
+    - threegad0
+    - threegad1
+    - threegad2
+    - threegad3    
+    
+- intent: gad4
+  examples: |
+    - gadd40
+    - gadd41
+    - gadd42
+    - gadd43
+
+- intent: gad5
+  examples: |
+    - gadd50
+    - gadd51
+    - gadd52
+    - gadd53
+
+- intent: gad6
+  examples: |
+    - gadd60
+    - gadd61
+    - gadd62
+    - gadd63
+
 - intent: gad7
   examples: |
-    - /GAD-7
-    - gad7
-    - GAD-7
+    - gadd70
+    - gadd71
+    - gadd72
+    - gadd73
+    
     
     
 - intent: stait
@@ -208,6 +276,85 @@ nlu:
     - stait
     - stais
     - stait/stais
+        
+- intent: startstait
+  examples: |
+    - /mulaistait
+    - mulai stait
+    - start stait
+    
+- intent: stait1
+  examples: |
+    - stait11
+    - stait12
+    - stait13
+    - stait14
+    
+- intent: stait2
+  examples: |
+    - stait21
+    - stait22
+    - stait23
+    - stait24
+        
+
+- intent: stait3
+  examples: |
+    - stait31
+    - stait32
+    - stait33
+    - stait34
+
+- intent: stait4
+  examples: |
+    - stait41
+    - stait42
+    - stait43
+    - stait44
+
+- intent: stait5
+  examples: |
+    - stait51
+    - stait52
+    - stait53
+    - stait54
+
+- intent: stait6
+  examples: |
+    - stait61
+    - stait62
+    - stait63
+    - stait64
+
+- intent: stait7
+  examples: |
+    - stait71
+    - stait72
+    - stait73
+    - stait74
+
+- intent: stait8
+  examples: |
+    - stait81
+    - stait82
+    - stait83
+    - stait84
+
+- intent: stait9
+  examples: |
+    - stait91
+    - stait92
+    - stait93
+    - stait94
+
+- intent: stait10
+  examples: |
+    - stait101
+    - stait102
+    - stait103
+    - stait104
+
+    
 
 - intent: curhat
   examples: |
@@ -328,6 +475,7 @@ nlu:
     - nganggur udah lama
     - ga bisa tidur
     - deg-deg an terus
+    - sangat sedih
 
 - intent: bot_challenge
   examples: |
@@ -343,1116 +491,4 @@ nlu:
     - Boleh kenalan? Siapa namanya?
     - kenalan yuk
     
-- intent: inform
-  examples: |
-    - nama [John Doe](name).
-    - umur [25](age).
-    - Pekerjaan/pendidikan [software engineer](job).
-    - gejala/masalah [pusing](symptom).
-    - Namaku [Walter](name).
-    - Nama  [Tiara](name).
-    - Nama  [desi](name).
-    - Usia [24](age).
-    - Usia [37](age).
-    - Pekerjaan [guru](job).
-    - Pekerjaan [Dokter](job).
-    - gejala/problem [muntah dan kering, sama ga bisa tidur](symptom).
-    - Nama  [aan](name).
-    - Nama  [abdul](name).
-    - Nama  [abdullah](name).
-    - Nama  [abidin](name).
-    - Nama  [abie](name).
-    - Nama  [achmad](name).
-    - Nama  [adam](name).
-    - Nama  [ade](name).
-    - Nama  [adhi](name).
-    - Nama  [adhitya](name).
-    - Nama  [adi](name).
-    - Nama  [adinda](name).
-    - Nama  [adipati](name).
-    - Nama  [adit](name).
-    - Nama  [aditia](name).
-    - Nama  [aditya](name).
-    - Nama  [adityo](name).
-    - Nama  [adrian](name).
-    - Nama  [adriani](name).
-    - Nama  [ady](name).
-    - Nama  [afni](name).
-    - Nama  [afriani](name).
-    - Nama  [afrizal](name).
-    - Nama  [agnes](name).
-    - Nama  [agung](name).
-    - Nama  [agus](name).
-    - Nama  [agustian](name).
-    - Nama  [agustin](name).
-    - Nama  [agustina](name).
-    - Nama  [agustini](name).
-    - Nama  [agustinus](name).
-    - Nama  [ahmad](name).
-    - Nama  [aini](name).
-    - Nama  [aisyah](name).
-    - Nama  [ajeng](name).
-    - Nama  [aji](name).
-    - Nama  [ajie](name).
-    - Nama  [akbar](name).
-    - Nama  [akhmad](name).
-    - Nama  [alam](name).
-    - Nama  [alamsyah](name).
-    - Nama  [alex](name).
-    - Nama  [alfian](name).
-    - Nama  [ali](name).
-    - Nama  [alif](name).
-    - Nama  [amalia](name).
-    - Nama  [amanda](name).
-    - Nama  [ambar](name).
-    - Nama  [ambarwati](name).
-    - Nama  [amelia](name).
-    - Nama  [amin](name).
-    - Nama  [aminah](name).
-    - Nama  [amir](name).
-    - Nama  [amri](name).
-    - Nama  [ana](name).
-    - Nama  [anak](name).
-    - Nama  [ananda](name).
-    - Nama  [anang](name).
-    - Nama  [anastasia](name).
-    - Nama  [andhika](name).
-    - Nama  [andi](name).
-    - Nama  [andika](name).
-    - Nama  [andina](name).
-    - Nama  [andini](name).
-    - Nama  [andre](name).
-    - Nama  [andreas](name).
-    - Nama  [andri](name).
-    - Nama  [andrian](name).
-    - Nama  [andriana](name).
-    - Nama  [andriani](name).
-    - Nama  [andriyani](name).
-    - Nama  [andry](name).
-    - Nama  [andy](name).
-    - Nama  [angelia](name).
-    - Nama  [angelina](name).
-    - Nama  [angga](name).
-    - Nama  [anggara](name).
-    - Nama  [anggi](name).
-    - Nama  [anggia](name).
-    - Nama  [anggit](name).
-    - Nama  [anggita](name).
-    - Nama  [anggoro](name).
-    - Nama  [anggraeni](name).
-    - Nama  [anggraini](name).
-    - Nama  [anggun](name).
-    - Nama  [ani](name).
-    - Nama  [anik](name).
-    - Nama  [anindita](name).
-    - Nama  [anis](name).
-    - Nama  [anisa](name).
-    - Nama  [anita](name).
-    - Nama  [anjar](name).
-    - Nama  [anna](name).
-    - Nama  [annisa](name).
-    - Nama  [anton](name).
-    - Nama  [antonius](name).
-    - Nama  [anugrah](name).
-    - Nama  [anwar](name).
-    - Nama  [apriani](name).
-    - Nama  [aprianto](name).
-    - Nama  [aprilia](name).
-    - Nama  [apriyani](name).
-    - Nama  [apriyanti](name).
-    - Nama  [ardi](name).
-    - Nama  [ardian](name).
-    - Nama  [ardiansyah](name).
-    - Nama  [ari](name).
-    - Nama  [aria](name).
-    - Nama  [ariani](name).
-    - Nama  [arie](name).
-    - Nama  [arief](name).
-    - Nama  [aries](name).
-    - Nama  [arif](name).
-    - Nama  [arifah](name).
-    - Nama  [arifin](name).
-    - Nama  [arini](name).
-    - Nama  [ario](name).
-    - Nama  [aris](name).
-    - Nama  [arisandi](name).
-    - Nama  [arista](name).
-    - Nama  [ariyani](name).
-    - Nama  [ariyanti](name).
-    - Nama  [ariyanto](name).
-    - Nama  [artha](name).
-    - Nama  [arum](name).
-    - Nama  [ary](name).
-    - Nama  [arya](name).
-    - Nama  [aryani](name).
-    - Nama  [aryo](name).
-    - Nama  [asep](name).
-    - Nama  [asih](name).
-    - Nama  [asmara](name).
-    - Nama  [asri](name).
-    - Nama  [asti](name).
-    - Nama  [astri](name).
-    - Nama  [astria](name).
-    - Nama  [astrid](name).
-    - Nama  [astuti](name).
-    - Nama  [atik](name).
-    - Nama  [atika](name).
-    - Nama  [aulia](name).
-    - Nama  [ayu](name).
-    - Nama  [ayuningtyas](name).
-    - Nama  [azhar](name).
-    - Nama  [azhari](name).
-    - Nama  [azis](name).
-    - Nama  [aziz](name).
-    - Nama  [azizah](name).
-    - Nama  [azmi](name).
-    - Nama  [bagus](name).
-    - Nama  [bahri](name).
-    - Nama  [baiq](name).
-    - Nama  [bambang](name).
-    - Nama  [bangun](name).
-    - Nama  [baskoro](name).
-    - Nama  [bayu](name).
-    - Nama  [benny](name).
-    - Nama  [betty](name).
-    - Nama  [bima](name).
-    - Nama  [bintang](name).
-    - Nama  [bobby](name).
-    - Nama  [budi](name).
-    - Nama  [budiman](name).
-    - Nama  [bunga](name).
-    - Nama  [cahya](name).
-    - Nama  [cahyadi](name).
-    - Nama  [cahyani](name).
-    - Nama  [cahyo](name).
-    - Nama  [cahyono](name).
-    - Nama  [candra](name).
-    - Nama  [carolina](name).
-    - Nama  [catur](name).
-    - Nama  [chandra](name).
-    - Nama  [christian](name).
-    - Nama  [christie](name).
-    - Nama  [christin](name).
-    - Nama  [christina](name).
-    - Nama  [christine](name).
-    - Nama  [christy](name).
-    - Nama  [cindy](name).
-    - Nama  [cinta](name).
-    - Nama  [citra](name).
-    - Nama  [cut](name).
-    - Nama  [dadang](name).
-    - Nama  [dahlia](name).
-    - Nama  [damayanti](name).
-    - Nama  [danang](name).
-    - Nama  [dani](name).
-    - Nama  [daniel](name).
-    - Nama  [danu](name).
-    - Nama  [darma](name).
-    - Nama  [darmawan](name).
-    - Nama  [david](name).
-    - Nama  [deasy](name).
-    - Nama  [debby](name).
-    - Nama  [debora](name).
-    - Nama  [deddy](name).
-    - Nama  [dede](name).
-    - Nama  [dedi](name).
-    - Nama  [dedy](name).
-    - Nama  [deni](name).
-    - Nama  [denny](name).
-    - Nama  [deny](name).
-    - Nama  [deri](name).
-    - Nama  [derry](name).
-    - Nama  [desi](name).
-    - Nama  [dessy](name).
-    - Nama  [desti](name).
-    - Nama  [desty](name).
-    - Nama  [desy](name).
-    - Nama  [devi](name).
-    - Nama  [devita](name).
-    - Nama  [devy](name).
-    - Nama  [dewa](name).
-    - Nama  [dewi](name).
-    - Nama  [dhani](name).
-    - Nama  [dharma](name).
-    - Nama  [dhian](name).
-    - Nama  [diah](name).
-    - Nama  [dian](name).
-    - Nama  [diana](name).
-    - Nama  [dicky](name).
-    - Nama  [didi](name).
-    - Nama  [didik](name).
-    - Nama  [dika](name).
-    - Nama  [dimas](name).
-    - Nama  [dina](name).
-    - Nama  [dinar](name).
-    - Nama  [dinda](name).
-    - Nama  [dini](name).
-    - Nama  [dita](name).
-    - Nama  [diyah](name).
-    - Nama  [dodi](name).
-    - Nama  [dody](name).
-    - Nama  [dona](name).
-    - Nama  [doni](name).
-    - Nama  [donny](name).
-    - Nama  [dono](name).
-    - Nama  [dony](name).
-    - Nama  [dwi](name).
-    - Nama  [dyah](name).
-    - Nama  [dyan](name).
-    - Nama  [eddy](name).
-    - Nama  [edi](name).
-    - Nama  [edwin](name).
-    - Nama  [edy](name).
-    - Nama  [efendi](name).
-    - Nama  [effendi](name).
-    - Nama  [eka](name).
-    - Nama  [ekawati](name).
-    - Nama  [eko](name).
-    - Nama  [elfrida](name).
-    - Nama  [eli](name).
-    - Nama  [elisa](name).
-    - Nama  [elisabeth](name).
-    - Nama  [eliza](name).
-    - Nama  [elly](name).
-    - Nama  [elsa](name).
-    - Nama  [ema](name).
-    - Nama  [emi](name).
-    - Nama  [emy](name).
-    - Nama  [endah](name).
-    - Nama  [endang](name).
-    - Nama  [eni](name).
-    - Nama  [eny](name).
-    - Nama  [era](name).
-    - Nama  [eri](name).
-    - Nama  [erik](name).
-    - Nama  [erika](name).
-    - Nama  [erlina](name).
-    - Nama  [erma](name).
-    - Nama  [erna](name).
-    - Nama  [ernawati](name).
-    - Nama  [erni](name).
-    - Nama  [ervina](name).
-    - Nama  [erwin](name).
-    - Nama  [ester](name).
-    - Nama  [esti](name).
-    - Nama  [eva](name).
-    - Nama  [evi](name).
-    - Nama  [evy](name).
-    - Nama  [fadli](name).
-    - Nama  [fahmi](name).
-    - Nama  [faisal](name).
-    - Nama  [faizah](name).
-    - Nama  [faizal](name).
-    - Nama  [fajar](name).
-    - Nama  [fajri](name).
-    - Nama  [fanny](name).
-    - Nama  [farah](name).
-    - Nama  [farid](name).
-    - Nama  [farida](name).
-    - Nama  [fatimah](name).
-    - Nama  [fatmawati](name).
-    - Nama  [fauzan](name).
-    - Nama  [fauzi](name).
-    - Nama  [fauzia](name).
-    - Nama  [fauziah](name).
-    - Nama  [febri](name).
-    - Nama  [febrian](name).
-    - Nama  [febriana](name).
-    - Nama  [febriani](name).
-    - Nama  [febrianti](name).
-    - Nama  [febrianto](name).
-    - Nama  [febrina](name).
-    - Nama  [febriyanti](name).
-    - Nama  [fenny](name).
-    - Nama  [fera](name).
-    - Nama  [feri](name).
-    - Nama  [fernando](name).
-    - Nama  [ferry](name).
-    - Nama  [fika](name).
-    - Nama  [fikri](name).
-    - Nama  [fina](name).
-    - Nama  [firdaus](name).
-    - Nama  [firman](name).
-    - Nama  [firmansyah](name).
-    - Nama  [fitra](name).
-    - Nama  [fitrah](name).
-    - Nama  [fitri](name).
-    - Nama  [fitria](name).
-    - Nama  [fitriah](name).
-    - Nama  [fitriana](name).
-    - Nama  [fitriani](name).
-    - Nama  [fitriyani](name).
-    - Nama  [fransisca](name).
-    - Nama  [fransiska](name).
-    - Nama  [frida](name).
-    - Nama  [friska](name).
-    - Nama  [fuad](name).
-    - Nama  [galih](name).
-    - Nama  [galuh](name).
-    - Nama  [gede](name).
-    - Nama  [gilang](name).
-    - Nama  [gina](name).
-    - Nama  [ginanjar](name).
-    - Nama  [ginting](name).
-    - Nama  [gita](name).
-    - Nama  [grace](name).
-    - Nama  [gultom](name).
-    - Nama  [gunawan](name).
-    - Nama  [guntur](name).
-    - Nama  [gusti](name).
-    - Nama  [hadi](name).
-    - Nama  [hajar](name).
-    - Nama  [hakim](name).
-    - Nama  [halim](name).
-    - Nama  [hana](name).
-    - Nama  [handayani](name).
-    - Nama  [handoko](name).
-    - Nama  [hani](name).
-    - Nama  [hanif](name).
-    - Nama  [hanifah](name).
-    - Nama  [hanna](name).
-    - Nama  [hanny](name).
-    - Nama  [hanum](name).
-    - Nama  [happy](name).
-    - Nama  [hapsari](name).
-    - Nama  [harahap](name).
-    - Nama  [hari](name).
-    - Nama  [haris](name).
-    - Nama  [harry](name).
-    - Nama  [hartanto](name).
-    - Nama  [hartati](name).
-    - Nama  [hartono](name).
-    - Nama  [hary](name).
-    - Nama  [haryanto](name).
-    - Nama  [haryo](name).
-    - Nama  [hasan](name).
-    - Nama  [hasanah](name).
-    - Nama  [hasibuan](name).
-    - Nama  [hastuti](name).
-    - Nama  [hayati](name).
-    - Nama  [helmi](name).
-    - Nama  [hendi](name).
-    - Nama  [hendra](name).
-    - Nama  [hendri](name).
-    - Nama  [hendrik](name).
-    - Nama  [hendro](name).
-    - Nama  [hendy](name).
-    - Nama  [heni](name).
-    - Nama  [henny](name).
-    - Nama  [henry](name).
-    - Nama  [herawati](name).
-    - Nama  [heri](name).
-    - Nama  [herlina](name).
-    - Nama  [herman](name).
-    - Nama  [hermanto](name).
-    - Nama  [hermawan](name).
-    - Nama  [herry](name).
-    - Nama  [heru](name).
-    - Nama  [hery](name).
-    - Nama  [hesti](name).
-    - Nama  [hidayah](name).
-    - Nama  [hidayat](name).
-    - Nama  [hidayati](name).
-    - Nama  [hikmah](name).
-    - Nama  [hilda](name).
-    - Nama  [himawan](name).
-    - Nama  [huda](name).
-    - Nama  [husna](name).
-    - Nama  [husni](name).
-    - Nama  [husnul](name).
-    - Nama  [hutabarat](name).
-    - Nama  [ibnu](name).
-    - Nama  [ibrahim](name).
-    - Nama  [ida](name).
-    - Nama  [ihsan](name).
-    - Nama  [iin](name).
-    - Nama  [iis](name).
-    - Nama  [ika](name).
-    - Nama  [ike](name).
-    - Nama  [ikhsan](name).
-    - Nama  [ilham](name).
-    - Nama  [ima](name).
-    - Nama  [imam](name).
-    - Nama  [iman](name).
-    - Nama  [imelda](name).
-    - Nama  [ina](name).
-    - Nama  [indah](name).
-    - Nama  [indra](name).
-    - Nama  [indrawan](name).
-    - Nama  [indrawati](name).
-    - Nama  [indri](name).
-    - Nama  [indriani](name).
-    - Nama  [indriyani](name).
-    - Nama  [intan](name).
-    - Nama  [iqbal](name).
-    - Nama  [ira](name).
-    - Nama  [irawan](name).
-    - Nama  [irawati](name).
-    - Nama  [irene](name).
-    - Nama  [irfan](name).
-    - Nama  [irma](name).
-    - Nama  [irna](name).
-    - Nama  [irvan](name).
-    - Nama  [irwan](name).
-    - Nama  [iskandar](name).
-    - Nama  [isma](name).
-    - Nama  [ismail](name).
-    - Nama  [isnaini](name).
-    - Nama  [istiqomah](name).
-    - Nama  [ita](name).
-    - Nama  [ivan](name).
-    - Nama  [iwan](name).
-    - Nama  [jannah](name).
-    - Nama  [januar](name).
-    - Nama  [jati](name).
-    - Nama  [jaya](name).
-    - Nama  [jayanti](name).
-    - Nama  [johan](name).
-    - Nama  [joko](name).
-    - Nama  [jonatan](name).
-    - Nama  [juli](name).
-    - Nama  [julia](name).
-    - Nama  [juliana](name).
-    - Nama  [julianti](name).
-    - Nama  [juni](name).
-    - Nama  [junita](name).
-    - Nama  [juwita](name).
-    - Nama  [kadek](name).
-    - Nama  [karina](name).
-    - Nama  [karlina](name).
-    - Nama  [kartika](name).
-    - Nama  [kartikasari](name).
-    - Nama  [kartini](name).
-    - Nama  [ketut](name).
-    - Nama  [khairul](name).
-    - Nama  [khairunnisa](name).
-    - Nama  [kharisma](name).
-    - Nama  [khotimah](name).
-    - Nama  [kiki](name).
-    - Nama  [komalasari](name).
-    - Nama  [komang](name).
-    - Nama  [krisna](name).
-    - Nama  [kristina](name).
-    - Nama  [kukuh](name).
-    - Nama  [kumala](name).
-    - Nama  [kumalasari](name).
-    - Nama  [kurnia](name).
-    - Nama  [kurniasari](name).
-    - Nama  [kurniasih](name).
-    - Nama  [kurniati](name).
-    - Nama  [kurniawan](name).
-    - Nama  [kurniawati](name).
-    - Nama  [kusuma](name).
-    - Nama  [kusumastuti](name).
-    - Nama  [kusumawati](name).
-    - Nama  [laila](name).
-    - Nama  [laili](name).
-    - Nama  [lala](name).
-    - Nama  [larasati](name).
-    - Nama  [latifah](name).
-    - Nama  [laura](name).
-    - Nama  [leni](name).
-    - Nama  [lenny](name).
-    - Nama  [leny](name).
-    - Nama  [leonardo](name).
-    - Nama  [lestari](name).
-    - Nama  [lia](name).
-    - Nama  [lidia](name).
-    - Nama  [lidya](name).
-    - Nama  [lilik](name).
-    - Nama  [lilis](name).
-    - Nama  [lina](name).
-    - Nama  [linda](name).
-    - Nama  [lisa](name).
-    - Nama  [listya](name).
-    - Nama  [lita](name).
-    - Nama  [liza](name).
-    - Nama  [lubis](name).
-    - Nama  [lucky](name).
-    - Nama  [luh](name).
-    - Nama  [lukman](name).
-    - Nama  [lumban](name).
-    - Nama  [luqman](name).
-    - Nama  [lusiana](name).
-    - Nama  [lutfi](name).
-    - Nama  [luthfi](name).
-    - Nama  [lydia](name).
-    - Nama  [made](name).
-    - Nama  [magdalena](name).
-    - Nama  [maharani](name).
-    - Nama  [mahardika](name).
-    - Nama  [mahendra](name).
-    - Nama  [mandasari](name).
-    - Nama  [manik](name).
-    - Nama  [manurung](name).
-    - Nama  [mardiana](name).
-    - Nama  [margaretha](name).
-    - Nama  [maria](name).
-    - Nama  [mariana](name).
-    - Nama  [marina](name).
-    - Nama  [marisa](name).
-    - Nama  [marissa](name).
-    - Nama  [marlina](name).
-    - Nama  [marta](name).
-    - Nama  [martha](name).
-    - Nama  [martin](name).
-    - Nama  [martina](name).
-    - Nama  [maryati](name).
-    - Nama  [mas](name).
-    - Nama  [maulana](name).
-    - Nama  [maulida](name).
-    - Nama  [maulina](name).
-    - Nama  [maya](name).
-    - Nama  [mayang](name).
-    - Nama  [mayasari](name).
-    - Nama  [mega](name).
-    - Nama  [megasari](name).
-    - Nama  [megawati](name).
-    - Nama  [mei](name).
-    - Nama  [meita](name).
-    - Nama  [melati](name).
-    - Nama  [melinda](name).
-    - Nama  [melisa](name).
-    - Nama  [merry](name).
-    - Nama  [meutia](name).
-    - Nama  [mia](name).
-    - Nama  [michael](name).
-    - Nama  [miftahul](name).
-    - Nama  [mila](name).
-    - Nama  [mira](name).
-    - Nama  [miranti](name).
-    - Nama  [mirza](name).
-    - Nama  [mita](name).
-    - Nama  [moch.](name).
-    - Nama  [mochamad](name).
-    - Nama  [mochammad](name).
-    - Nama  [moh.](name).
-    - Nama  [mohamad](name).
-    - Nama  [mohammad](name).
-    - Nama  [monica](name).
-    - Nama  [muchamad](name).
-    - Nama  [muh.](name).
-    - Nama  [muhamad](name).
-    - Nama  [muhammad](name).
-    - Nama  [mukti](name).
-    - Nama  [mulia](name).
-    - Nama  [mulya](name).
-    - Nama  [mulyani](name).
-    - Nama  [murni](name).
-    - Nama  [murti](name).
-    - Nama  [muslim](name).
-    - Nama  [mustika](name).
-    - Nama  [mutia](name).
-    - Nama  [mutiara](name).
-    - Nama  [muttaqin](name).
-    - Nama  [nadia](name).
-    - Nama  [nadya](name).
-    - Nama  [nana](name).
-    - Nama  [nanang](name).
-    - Nama  [nanda](name).
-    - Nama  [nani](name).
-    - Nama  [nanik](name).
-    - Nama  [napitupulu](name).
-    - Nama  [nasution](name).
-    - Nama  [natalia](name).
-    - Nama  [nelly](name).
-    - Nama  [neni](name).
-    - Nama  [ni](name).
-    - Nama  [nia](name).
-    - Nama  [niken](name).
-    - Nama  [nila](name).
-    - Nama  [nina](name).
-    - Nama  [ningrum](name).
-    - Nama  [ningsih](name).
-    - Nama  [nirmala](name).
-    - Nama  [nisa](name).
-    - Nama  [nita](name).
-    - Nama  [noni](name).
-    - Nama  [noor](name).
-    - Nama  [nora](name).
-    - Nama  [norma](name).
-    - Nama  [nova](name).
-    - Nama  [novalia](name).
-    - Nama  [novi](name).
-    - Nama  [novia](name).
-    - Nama  [noviana](name).
-    - Nama  [noviani](name).
-    - Nama  [novianti](name).
-    - Nama  [novita](name).
-    - Nama  [novitasari](name).
-    - Nama  [noviyanti](name).
-    - Nama  [nugraha](name).
-    - Nama  [nugraheni](name).
-    - Nama  [nugroho](name).
-    - Nama  [nur](name).
-    - Nama  [nuraeni](name).
-    - Nama  [nuraini](name).
-    - Nama  [nurhasanah](name).
-    - Nama  [nurhayati](name).
-    - Nama  [nurina](name).
-    - Nama  [nurjanah](name).
-    - Nama  [nurmala](name).
-    - Nama  [nurul](name).
-    - Nama  [nyoman](name).
-    - Nama  [octavia](name).
-    - Nama  [octaviani](name).
-    - Nama  [okta](name).
-    - Nama  [oktarina](name).
-    - Nama  [oktavia](name).
-    - Nama  [oktaviana](name).
-    - Nama  [oktaviani](name).
-    - Nama  [olivia](name).
-    - Nama  [palupi](name).
-    - Nama  [pamungkas](name).
-    - Nama  [pandu](name).
-    - Nama  [panjaitan](name).
-    - Nama  [panji](name).
-    - Nama  [paramita](name).
-    - Nama  [paramitha](name).
-    - Nama  [parulian](name).
-    - Nama  [pasaribu](name).
-    - Nama  [perdana](name).
-    - Nama  [permana](name).
-    - Nama  [permata](name).
-    - Nama  [permatasari](name).
-    - Nama  [pertiwi](name).
-    - Nama  [peter](name).
-    - Nama  [pipit](name).
-    - Nama  [piter](name).
-    - Nama  [poppy](name).
-    - Nama  [prabowo](name).
-    - Nama  [pradana](name).
-    - Nama  [pradipta](name).
-    - Nama  [pramita](name).
-    - Nama  [pramono](name).
-    - Nama  [prasetya](name).
-    - Nama  [prasetyo](name).
-    - Nama  [pratama](name).
-    - Nama  [pratiwi](name).
-    - Nama  [pratomo](name).
-    - Nama  [pribadi](name).
-    - Nama  [prima](name).
-    - Nama  [prita](name).
-    - Nama  [priyo](name).
-    - Nama  [puji](name).
-    - Nama  [purba](name).
-    - Nama  [puri](name).
-    - Nama  [purnama](name).
-    - Nama  [purnamasari](name).
-    - Nama  [purnomo](name).
-    - Nama  [purwaningsih](name).
-    - Nama  [purwanti](name).
-    - Nama  [purwanto](name).
-    - Nama  [puspa](name).
-    - Nama  [puspasari](name).
-    - Nama  [puspita](name).
-    - Nama  [puspitasari](name).
-    - Nama  [puti](name).
-    - Nama  [putra](name).
-    - Nama  [putri](name).
-    - Nama  [putro](name).
-    - Nama  [putu](name).
-    - Nama  [rachma](name).
-    - Nama  [rachmad](name).
-    - Nama  [rachman](name).
-    - Nama  [rachmat](name).
-    - Nama  [rachmawati](name).
-    - Nama  [raden](name).
-    - Nama  [raditya](name).
-    - Nama  [ragil](name).
-    - Nama  [rahadian](name).
-    - Nama  [rahayu](name).
-    - Nama  [rahma](name).
-    - Nama  [rahmad](name).
-    - Nama  [rahmadhani](name).
-    - Nama  [rahmah](name).
-    - Nama  [rahman](name).
-    - Nama  [rahmat](name).
-    - Nama  [rahmawati](name).
-    - Nama  [rahmi](name).
-    - Nama  [rama](name).
-    - Nama  [ramadhan](name).
-    - Nama  [ramadhani](name).
-    - Nama  [randy](name).
-    - Nama  [rangga](name).
-    - Nama  [rani](name).
-    - Nama  [rara](name).
-    - Nama  [rasyid](name).
-    - Nama  [ratih](name).
-    - Nama  [ratna](name).
-    - Nama  [ratnasari](name).
-    - Nama  [ratnawati](name).
-    - Nama  [ratri](name).
-    - Nama  [ratu](name).
-    - Nama  [regina](name).
-    - Nama  [rendy](name).
-    - Nama  [reni](name).
-    - Nama  [renny](name).
-    - Nama  [reny](name).
-    - Nama  [resti](name).
-    - Nama  [restu](name).
-    - Nama  [retno](name).
-    - Nama  [reza](name).
-    - Nama  [ria](name).
-    - Nama  [rian](name).
-    - Nama  [riana](name).
-    - Nama  [riani](name).
-    - Nama  [ricky](name).
-    - Nama  [ridha](name).
-    - Nama  [ridho](name).
-    - Nama  [ridwan](name).
-    - Nama  [rifki](name).
-    - Nama  [rika](name).
-    - Nama  [riki](name).
-    - Nama  [rima](name).
-    - Nama  [rina](name).
-    - Nama  [rinaldi](name).
-    - Nama  [rini](name).
-    - Nama  [rio](name).
-    - Nama  [riri](name).
-    - Nama  [ririn](name).
-    - Nama  [risa](name).
-    - Nama  [riska](name).
-    - Nama  [riski](name).
-    - Nama  [risky](name).
-    - Nama  [risma](name).
-    - Nama  [risna](name).
-    - Nama  [rita](name).
-    - Nama  [riyadi](name).
-    - Nama  [riyanto](name).
-    - Nama  [riza](name).
-    - Nama  [rizal](name).
-    - Nama  [rizka](name).
-    - Nama  [rizki](name).
-    - Nama  [rizky](name).
-    - Nama  [rizqi](name).
-    - Nama  [robby](name).
-    - Nama  [romi](name).
-    - Nama  [romy](name).
-    - Nama  [ronald](name).
-    - Nama  [roni](name).
-    - Nama  [rony](name).
-    - Nama  [roro](name).
-    - Nama  [rosa](name).
-    - Nama  [rosalina](name).
-    - Nama  [rosdiana](name).
-    - Nama  [rosita](name).
-    - Nama  [roy](name).
-    - Nama  [roza](name).
-    - Nama  [rudi](name).
-    - Nama  [rudy](name).
-    - Nama  [rully](name).
-    - Nama  [ruth](name).
-    - Nama  [ryan](name).
-    - Nama  [safitri](name).
-    - Nama  [sahat](name).
-    - Nama  [sakti](name).
-    - Nama  [salman](name).
-    - Nama  [samuel](name).
-    - Nama  [sandi](name).
-    - Nama  [sandra](name).
-    - Nama  [sandy](name).
-    - Nama  [sani](name).
-    - Nama  [sanjaya](name).
-    - Nama  [santi](name).
-    - Nama  [santoso](name).
-    - Nama  [santy](name).
-    - Nama  [sapta](name).
-    - Nama  [sapto](name).
-    - Nama  [saputra](name).
-    - Nama  [saputri](name).
-    - Nama  [saputro](name).
-    - Nama  [saragih](name).
-    - Nama  [sarah](name).
-    - Nama  [saraswati](name).
-    - Nama  [sari](name).
-    - Nama  [sartika](name).
-    - Nama  [satria](name).
-    - Nama  [satrio](name).
-    - Nama  [satya](name).
-    - Nama  [savitri](name).
-    - Nama  [sekar](name).
-    - Nama  [selly](name).
-    - Nama  [sembiring](name).
-    - Nama  [senja](name).
-    - Nama  [septi](name).
-    - Nama  [septian](name).
-    - Nama  [septiana](name).
-    - Nama  [septiani](name).
-    - Nama  [setia](name).
-    - Nama  [setiadi](name).
-    - Nama  [setiawan](name).
-    - Nama  [setiawati](name).
-    - Nama  [seto](name).
-    - Nama  [setya](name).
-    - Nama  [setyaningsih](name).
-    - Nama  [setyawan](name).
-    - Nama  [setyo](name).
-    - Nama  [setyowati](name).
-    - Nama  [shinta](name).
-    - Nama  [siagian](name).
-    - Nama  [siahaan](name).
-    - Nama  [sigit](name).
-    - Nama  [sihombing](name).
-    - Nama  [silalahi](name).
-    - Nama  [silvia](name).
-    - Nama  [simanjuntak](name).
-    - Nama  [simatupang](name).
-    - Nama  [simbolon](name).
-    - Nama  [sinaga](name).
-    - Nama  [singgih](name).
-    - Nama  [sinta](name).
-    - Nama  [sirait](name).
-    - Nama  [siregar](name).
-    - Nama  [siska](name).
-    - Nama  [sitanggang](name).
-    - Nama  [siti](name).
-    - Nama  [sitompul](name).
-    - Nama  [sitorus](name).
-    - Nama  [sitti](name).
-    - Nama  [slamet](name).
-    - Nama  [sofia](name).
-    - Nama  [sofyan](name).
-    - Nama  [soraya](name).
-    - Nama  [sri](name).
-    - Nama  [suci](name).
-    - Nama  [sugeng](name).
-    - Nama  [sukma](name).
-    - Nama  [sukmawati](name).
-    - Nama  [sulastri](name).
-    - Nama  [sulistyo](name).
-    - Nama  [sulistyowati](name).
-    - Nama  [sundari](name).
-    - Nama  [supriyanto](name).
-    - Nama  [surya](name).
-    - Nama  [suryadi](name).
-    - Nama  [suryani](name).
-    - Nama  [suryo](name).
-    - Nama  [susanti](name).
-    - Nama  [susanto](name).
-    - Nama  [susi](name).
-    - Nama  [susilo](name).
-    - Nama  [susilowati](name).
-    - Nama  [sutrisno](name).
-    - Nama  [syafitri](name).
-    - Nama  [syah](name).
-    - Nama  [syahputra](name).
-    - Nama  [syahrul](name).
-    - Nama  [syaiful](name).
-    - Nama  [syam](name).
-    - Nama  [syamsul](name).
-    - Nama  [syarif](name).
-    - Nama  [syarifah](name).
-    - Nama  [tambunan](name).
-    - Nama  [tampubolon](name).
-    - Nama  [tanjung](name).
-    - Nama  [tantri](name).
-    - Nama  [tarigan](name).
-    - Nama  [taufan](name).
-    - Nama  [taufik](name).
-    - Nama  [taufiq](name).
-    - Nama  [teguh](name).
-    - Nama  [theresia](name).
-    - Nama  [tia](name).
-    - Nama  [tiara](name).
-    - Nama  [tika](name).
-    - Nama  [tirta](name).
-    - Nama  [tita](name).
-    - Nama  [titi](name).
-    - Nama  [titik](name).
-    - Nama  [titin](name).
-    - Nama  [titis](name).
-    - Nama  [tommy](name).
-    - Nama  [toni](name).
-    - Nama  [tri](name).
-    - Nama  [tria](name).
-    - Nama  [triana](name).
-    - Nama  [trisna](name).
-    - Nama  [trisnawati](name).
-    - Nama  [tua](name).
-    - Nama  [tulus](name).
-    - Nama  [tuti](name).
-    - Nama  [tyas](name).
-    - Nama  [ulfa](name).
-    - Nama  [ulfah](name).
-    - Nama  [umar](name).
-    - Nama  [umi](name).
-    - Nama  [uswatun](name).
-    - Nama  [utama](name).
-    - Nama  [utami](name).
-    - Nama  [utari](name).
-    - Nama  [utomo](name).
-    - Nama  [vera](name).
-    - Nama  [veronica](name).
-    - Nama  [veronika](name).
-    - Nama  [vidya](name).
-    - Nama  [vina](name).
-    - Nama  [vita](name).
-    - Nama  [vivi](name).
-    - Nama  [wahyu](name).
-    - Nama  [wahyudi](name).
-    - Nama  [wahyuni](name).
-    - Nama  [wahyuningsih](name).
-    - Nama  [wanda](name).
-    - Nama  [wardani](name).
-    - Nama  [wardhana](name).
-    - Nama  [wardhani](name).
-    - Nama  [wati](name).
-    - Nama  [wawan](name).
-    - Nama  [wayan](name).
-    - Nama  [wenny](name).
-    - Nama  [wibisono](name).
-    - Nama  [wibowo](name).
-    - Nama  [wicaksono](name).
-    - Nama  [widhi](name).
-    - Nama  [widi](name).
-    - Nama  [widia](name).
-    - Nama  [widiastuti](name).
-    - Nama  [widodo](name).
-    - Nama  [widya](name).
-    - Nama  [widyaningrum](name).
-    - Nama  [widyastuti](name).
-    - Nama  [wijaya](name).
-    - Nama  [wijayanti](name).
-    - Nama  [wijayanto](name).
-    - Nama  [willy](name).
-    - Nama  [wina](name).
-    - Nama  [winda](name).
-    - Nama  [windi](name).
-    - Nama  [windy](name).
-    - Nama  [wira](name).
-    - Nama  [wirawan](name).
-    - Nama  [wisnu](name).
-    - Nama  [wiwik](name).
-    - Nama  [wiwin](name).
-    - Nama  [wulan](name).
-    - Nama  [wulandari](name).
-    - Nama  [wulansari](name).
-    - Nama  [wuri](name).
-    - Nama  [yan](name).
-    - Nama  [yani](name).
-    - Nama  [yanti](name).
-    - Nama  [yanuar](name).
-    - Nama  [yayuk](name).
-    - Nama  [yeni](name).
-    - Nama  [yenni](name).
-    - Nama  [yenny](name).
-    - Nama  [yoga](name).
-    - Nama  [yogi](name).
-    - Nama  [yohana](name).
-    - Nama  [yohanes](name).
-    - Nama  [yolanda](name).
-    - Nama  [yuanita](name).
-    - Nama  [yuda](name).
-    - Nama  [yudha](name).
-    - Nama  [yudhi](name).
-    - Nama  [yudi](name).
-    - Nama  [yuli](name).
-    - Nama  [yulia](name).
-    - Nama  [yuliana](name).
-    - Nama  [yuliani](name).
-    - Nama  [yulianti](name).
-    - Nama  [yulianto](name).
-    - Nama  [yulita](name).
-    - Nama  [yun](name).
-    - Nama  [yuni](name).
-    - Nama  [yunia](name).
-    - Nama  [yuniar](name).
-    - Nama  [yuniarti](name).
-    - Nama  [yunita](name).
-    - Nama  [yusnita](name).
-    - Nama  [yusuf](name).
-    - Nama  [yuyun](name).
-    - Nama  [zainal](name).
-    - Nama  [zulfikar](name).
-    - Usia [10](age)
-    - Usia [11](age)
-    - Usia [12](age)
-    - Usia [13](age)
-    - Usia [14](age)
-    - Usia [15](age)
-    - Usia [16](age)
-    - Usia [17](age)
-    - Usia [18](age)
-    - Usia [19](age)
-    - Usia [20](age)
-    - Usia [21](age)
-    - Usia [22](age)
-    - Usia [23](age)
-    - Usia [24](age)
-    - Usia [25](age)
-    - Usia [26](age)
-    - Usia [27](age)
-    - Usia [28](age)
-    - Usia [29](age)
-    - Usia [30](age)
-    - Usia [31](age)
-    - Usia [32](age)
-    - Usia [33](age)
-    - Usia [34](age)
-    - Usia [35](age)
-    - Usia [36](age)
-    - Usia [37](age)
-    - Usia [38](age)
-    - Usia [39](age)
-    - Usia [40](age)
-    - Usia [41](age)
-    - Usia [42](age)
-    - Usia [43](age)
-    - Usia [44](age)
-    - Usia [45](age)
-    - Usia [46](age)
-    - Usia [47](age)
-    - Usia [48](age)
-    - Usia [49](age)
-    - Usia [50](age)
-    - Usia [51](age)
-    - Usia [52](age)
-    - Usia [53](age)
-    - Usia [54](age)
-    - Usia [55](age)
-    - Usia [56](age)
-    - Usia [57](age)
-    - Usia [58](age)
-    - Usia [59](age)
-    - Usia [60](age)
-    - Usia [61](age)
-    - Usia [62](age)
-    - Usia [63](age)
-    - Usia [64](age)
-    - Usia [65](age)
-    - Usia [66](age)
-    - Usia [67](age)
-    - Usia [68](age)
-    - Usia [69](age)
-    - Usia [70](age)
-    - Usia [71](age)
-    - Usia [72](age)
-    - Usia [73](age)
-    - Usia [74](age)
-    - Usia [75](age)
-    - Usia [76](age)
-    - Usia [77](age)
-    - Usia [78](age)
-    - Usia [79](age)
-    - Usia [80](age)
-    - Usia [81](age)
-    - Usia [82](age)
-    - Usia [83](age)
-    - Usia [84](age)
-    - Usia [85](age)
-    - Usia [86](age)
-    - Usia [87](age)
-    - Usia [88](age)
-    - Usia [89](age)
-    - Usia [90](age)
-    - Usia [91](age)
-    - Usia [92](age)
-    - Usia [93](age)
-    - Usia [94](age)
-    - Usia [95](age)
-    - Usia [96](age)
-    - Usia [97](age)
-    - Usia [98](age)
-    - Usia [99](age)
-    - Usia [100](age)
+
