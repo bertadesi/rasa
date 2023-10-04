@@ -150,6 +150,17 @@ actions:
  - action_intent_dass13
  - action_intent_dass14
  - action_intent_dassClose
+  - action_intent_stait
+ - action_intent_stait1
+ - action_intent_stait2
+ - action_intent_stait3
+ - action_intent_stait4
+ - action_intent_stait5
+ - action_intent_stait6
+ - action_intent_stait7
+ - action_intent_stait8
+ - action_intent_stait9
+ - action_intent_stait10
  
 
 session_config:
