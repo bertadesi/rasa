@@ -38,6 +38,18 @@ intents:
   - dass12
   - dass13
   - dass14
+   - stait
+  - startstait
+  - stait1
+  - stait2
+  - stait3
+  - stait4
+  - stait5
+  - stait6
+  - stait7
+  - stait8
+  - stait9
+  - stait10
   
 
 entities:
