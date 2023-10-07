@@ -18,7 +18,7 @@ import configparser
 from rasa_sdk.events import SlotSet
 import tracemalloc
 
-
+import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sentence_transformers import SentenceTransformer, models
 from torch import nn
@@ -271,6 +271,36 @@ def countMeasurement(sender_id,code_measurement):
       
     return result_string
 
+
+def SBERTModel(text):
+    
+    model_name = "indobenchmark/indobert-base-p1"
+    word_embedding_model = models.Transformer(model_name, max_seq_length=256)
+    pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
+    dense_model = models.Dense(in_features=pooling_model.get_sentence_embedding_dimension(), out_features=256, activation_function=nn.Tanh())
+    model = SentenceTransformer(modules=[word_embedding_model, pooling_model, dense_model])
+
+    input_text = text
+    
+    df = pd.read_csv('data/dataset.csv')
+    reference_texts = df['symptom'].tolist()
+
+    input_embedding = model.encode([input_text])[0]
+    reference_embeddings = model.encode(reference_texts)
+
+    similarity_scores = cosine_similarity([input_embedding], reference_embeddings)[0]
+    sorted_indices = np.argsort(similarity_scores)[::-1]
+    #sorted_texts = [reference_texts[i] for i in sorted_indices]
+    max_similarity_score = similarity_scores[sorted_indices[0]]
+    
+    if max_similarity_score > 0.8:
+        is_anxiety ='Y'
+        
+    else:
+        is_anxiety ='N'
+    
+    return is_anxiety
+
 class ActionHelloWorld(Action):
 
 
@@ -317,10 +347,11 @@ class ActionHelloWorld(Action):
         # Update the URL to point to your Ngrok URL
        
 
-        telegram_token = "5866219252:AAGrKXI5Ib9Mi3wEQ5JNc60OSveh7pOQ-f0"
+        telegram_token = "6681142425:AAFJDy1oG-9EKr3RdV5KRRTbXv0H2a_OQxg"
         telegram_api_url = f"https://api.telegram.org/bot{telegram_token}/getChatMember?chat_id={sender_id}&user_id={sender_id}"
         
         response = requests.get(telegram_api_url)
+        
         
         
         print(response.json())
@@ -555,33 +586,14 @@ class ActionCheckCurhatSedih(Action):
           
           print(message_id)
              
-          model_name = "indobenchmark/indobert-base-p1"
-          word_embedding_model = models.Transformer(model_name, max_seq_length=256)
-          pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
-          dense_model = models.Dense(in_features=pooling_model.get_sentence_embedding_dimension(), out_features=256, activation_function=nn.Tanh())
-          model = SentenceTransformer(modules=[word_embedding_model, pooling_model, dense_model])
-     
-          input_text = message_id
-          reference_texts = ["mengalami perubahan nafsu makan",
-             "mengalami perubahan tidur",
-              "merasa kelelahan atau kekurangan energi",
-              "kesulitan berkonsentrasi atau membuat keputusan",
-              "merasa cemas atau gelisah",
-              "mengalami serangan panik",
-              "mengalami perubahan fisik yang tidak dapat dijelaskan",
-              "memiliki pikiran atau keinginan untuk menyakiti diri sendiri atau berpikir tentang kematian"]
-          input_embedding = model.encode([input_text])[0]
-          reference_embeddings = model.encode(reference_texts)
-     
-          similarity_scores = cosine_similarity([input_embedding], reference_embeddings)[0]
-          sorted_indices = np.argsort(similarity_scores)[::-1]
-     
-              # Retrieve the original texts based on the sorted indices
-          sorted_texts = [reference_texts[i] for i in sorted_indices]
-          print(sorted_texts[0]) 
-             
-          message ='oh kamu'
-          dispatcher.utter_message(text=message+" "+sorted_texts[0])
+          is_anxiety=SBERTModel(message_id)
+          if is_anxiety=='Y':
+              
+             message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk cek atau baca2 tentang artikel'
+          else:
+             message ='Dari hasil cek tadi memang benar skornya diatas rata-rata, tetapi kemungkinan itu hanya kondisi sesaat saja' 
+            
+          dispatcher.utter_message(text=message+" ")
           
           
 class ActionCheckCurhatSeneng(Action):
@@ -1278,6 +1290,30 @@ class ActionGAD7(Action):
                       
                   ]) 
                 
+class ActionGADClose(Action):
+    def name(self) -> Text:
+        return "action_intent_gadClose"
+
+    def run(self, dispatcher: CollectingDispatcher,
+              tracker: Tracker,
+              domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+         
+          message_id = tracker.latest_message.get("text") 
+          sender_id =  tracker.sender_id
+          
+          cekTotalScore = int(countMeasurement(sender_id, message_id))
+          cekCurrent = ValidateMeasurement(sender_id, message_id)
+          if cekCurrent == 0:
+              insertMeasurement(sender_id,message_id)
+          else:
+              deleteMeasurement(sender_id, message_id)
+              insertMeasurement(sender_id,message_id)
+          
+          if cekTotalScore >= "14.00":
+             dispatcher.utter_message(text=message_confirmation) 
+          else:
+             dispatcher.utter_message(text=message_dass_Close)    
+                
 class ActionSTAIT(Action):
     def name(self) -> Text:
         return "action_intent_stait"
@@ -1288,7 +1324,7 @@ class ActionSTAIT(Action):
          
           
               dispatcher.utter_message(text=message_intro_stait,buttons=[
-                      {"title": "Mulai", "payload": "/mulaistait"},
+                      {"title": "Mulai", "payload": "/startstait"},
                       {"title": "Batal", "payload": "/batal"}
                 ])      
  
@@ -1302,10 +1338,10 @@ class ActionSTAIT1(Action):
          
           
           dispatcher.utter_message(text=message_stait_1,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait11"},
-                      {"title": "Sedikit", "payload": "stait12"},
-                      {"title": "Lumayan", "payload": "stait13"},
-                      {"title": "Sangat", "payload": "stait14"}
+                      {"title": "Tidak sama sekali", "payload": "stata11"},
+                      {"title": "Sedikit", "payload": "stata12"},
+                      {"title": "Lumayan", "payload": "stata13"},
+                      {"title": "Sangat", "payload": "stata14"}
                                             
                       
                   ]) 
@@ -1330,7 +1366,7 @@ class ActionSTAIT2(Action):
               insertMeasurement(sender_id,message_id)
               
           dispatcher.utter_message(text=message_stait_2,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait21"},
+                      {"title": "Tidak sama sekali", "payload": "stata21"},
                       {"title": "Sedikit", "payload": "stait22"},
                       {"title": "Lumayan", "payload": "stait23"},
                       {"title": "Sangat", "payload": "stait24"}
