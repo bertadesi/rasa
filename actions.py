@@ -142,6 +142,74 @@ def insertMeasurement(sender_id,code_measurement):
     return None
 
 
+
+def insertSurvey(sender_id,code_measurement):
+   
+    try:
+            
+            
+        score = code_measurement[-1]
+           
+ 
+     # Create a connection
+               
+        print('survey')
+               # Execute an INSERT query to save the feedback
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO survey (session_id, components,score)"
+                              "VALUES  (%s, %s, %s, %s)", (sender_id,code_measurement,score))
+        conn.commit()
+   
+   
+    except mysql.connector.Error as err:
+            
+               print(err)
+   
+    finally:
+               # Close the database connection
+              if 'cursor' in locals():
+                 cursor.close()
+              if 'conn' in locals():
+                 conn.close()
+
+      
+    return None
+
+def deleteSurvey(sender_id,code_measurement):
+   
+    try:
+            
+    
+        code = code_measurement[:-1]      
+        print(code)
+        query1 = "delete from survey  where session_id='" + sender_id+ "' and components like'%"+code +"%'"
+       
+ 
+     # Create a connection
+               
+        print('delete survey?')
+               # Execute an INSERT query to save the feedback
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+   
+   
+    except mysql.connector.Error as err:
+            
+        print(err)
+   
+    finally:
+               # Close the database connection
+        
+        if 'cursor' in locals():
+           cursor.close()
+        if 'conn' in locals():
+           conn.close()
+        
+
+      
+    return None
+
 def deleteMeasurement(sender_id,code_measurement):
    
     try:
@@ -149,7 +217,7 @@ def deleteMeasurement(sender_id,code_measurement):
     
         code = code_measurement[:-1]      
         print(code)
-        query1 = "delete from measurement  where session_id='" + sender_id+ "' and code_measurement like'%"+code +"%'"
+        query1 = "delete from survey  where session_id='" + sender_id+ "' and code_measurement like'%"+code +"%'"
        
  
      # Create a connection
@@ -202,6 +270,43 @@ def ValidateMeasurement(sender_id,code_measurement):
      # Create a connection
         cursor = conn.cursor()       
         query = query1 + query2 +" and session_id = %s"
+        cursor.execute(query, (sender_id,))
+
+# Fetch the results if needed
+        result = cursor.fetchone()
+        result_string = str(result[0])
+        print(result_string)
+        print('validate')
+   
+    except mysql.connector.Error as err:
+            
+               print(err)
+   
+    finally:
+               # Close the database connection
+               if 'cursor' in locals():
+                  cursor.close()
+               if 'conn' in locals():
+                  conn.close()
+
+      
+    return result_string
+
+
+
+def ValidateSurvey(sender_id,code_measurement):
+    
+    result_string =""
+    try:
+            
+        code = code_measurement[:-1] 
+        query1="SELECT count(*) FROM survey WHERE components  like '%"+  code+"%'"               
+       
+       
+ 
+     # Create a connection
+        cursor = conn.cursor()       
+        query = query1  +" and session_id = %s"
         cursor.execute(query, (sender_id,))
 
 # Fetch the results if needed
@@ -589,7 +694,8 @@ class ActionCheckCurhatSedih(Action):
           is_anxiety=SBERTModel(message_id)
           if is_anxiety=='Y':
               
-             message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk cek atau baca2 tentang artikel'
+             message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk konsultasi atau baca2 artikel tentang hal ini'
+          
           else:
              message ='Dari hasil cek tadi memang benar skornya diatas rata-rata, tetapi kemungkinan itu hanya kondisi sesaat saja' 
             
@@ -1367,9 +1473,9 @@ class ActionSTAIT2(Action):
               
           dispatcher.utter_message(text=message_stait_2,buttons=[
                       {"title": "Tidak sama sekali", "payload": "stata21"},
-                      {"title": "Sedikit", "payload": "stait22"},
-                      {"title": "Lumayan", "payload": "stait23"},
-                      {"title": "Sangat", "payload": "stait24"}
+                      {"title": "Sedikit", "payload": "stata22"},
+                      {"title": "Lumayan", "payload": "stata23"},
+                      {"title": "Sangat", "payload": "stata24"}
                                             
                       
                   ])   
@@ -1392,10 +1498,10 @@ class ActionSTAIT3(Action):
               insertMeasurement(sender_id,message_id)
               
           dispatcher.utter_message(text=message_stait_3,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait31"},
-                      {"title": "Sedikit", "payload": "stait32"},
-                      {"title": "Lumayan", "payload": "stait33"},
-                      {"title": "Sangat", "payload": "stait34"}
+                      {"title": "Tidak sama sekali", "payload": "stata31"},
+                      {"title": "Sedikit", "payload": "stata32"},
+                      {"title": "Lumayan", "payload": "stata33"},
+                      {"title": "Sangat", "payload": "stata34"}
                                             
                       
                   ])
@@ -1418,10 +1524,10 @@ class ActionSTAIT4(Action):
               insertMeasurement(sender_id,message_id)
               
           dispatcher.utter_message(text=message_stait_4,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait41"},
-                      {"title": "Sedikit", "payload": "stait42"},
-                      {"title": "Lumayan", "payload": "stait43"},
-                      {"title": "Sangat", "payload": "stait44"}
+                      {"title": "Tidak sama sekali", "payload": "stata41"},
+                      {"title": "Sedikit", "payload": "stata42"},
+                      {"title": "Lumayan", "payload": "stata43"},
+                      {"title": "Sangat", "payload": "stata44"}
                                             
                       
                   ])  
@@ -1444,10 +1550,10 @@ class ActionSTAIT5(Action):
               insertMeasurement(sender_id,message_id)
               
           dispatcher.utter_message(text=message_stait_5,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait51"},
-                      {"title": "Sedikit", "payload": "stait52"},
-                      {"title": "Lumayan", "payload": "stait53"},
-                      {"title": "Sangat", "payload": "stait54"}
+                      {"title": "Tidak sama sekali", "payload": "stata51"},
+                      {"title": "Sedikit", "payload": "stata52"},
+                      {"title": "Lumayan", "payload": "stata53"},
+                      {"title": "Sangat", "payload": "stata54"}
                                             
                       
                   ])  
@@ -1471,9 +1577,9 @@ class ActionSTAIT6(Action):
               
           dispatcher.utter_message(text=message_stait_6,buttons=[
                       {"title": "Tidak sama sekali", "payload": "stait61"},
-                      {"title": "Sedikit", "payload": "stait62"},
-                      {"title": "Lumayan", "payload": "stait63"},
-                      {"title": "Sangat", "payload": "stait64"}
+                      {"title": "Sedikit", "payload": "stata62"},
+                      {"title": "Lumayan", "payload": "stata63"},
+                      {"title": "Sangat", "payload": "stata64"}
                                             
                       
                   ])  
@@ -1497,10 +1603,10 @@ class ActionSTAIT7(Action):
               insertMeasurement(sender_id,message_id)
               
           dispatcher.utter_message(text=message_stait_7,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait71"},
-                      {"title": "Sedikit", "payload": "stait72"},
-                      {"title": "Lumayan", "payload": "stait73"},
-                      {"title": "Sangat", "payload": "stait74"}
+                      {"title": "Tidak sama sekali", "payload": "stata71"},
+                      {"title": "Sedikit", "payload": "stata72"},
+                      {"title": "Lumayan", "payload": "stata73"},
+                      {"title": "Sangat", "payload": "stata74"}
                                             
                       
                   ])                           
@@ -1529,10 +1635,10 @@ class ActionSTAIT8(Action):
           
               
                dispatcher.utter_message(text=message_stait_8,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait81"},
-                      {"title": "Sedikit", "payload": "stait82"},
-                      {"title": "Lumayan", "payload": "stait83"},
-                      {"title": "Sangat", "payload": "stait84"}
+                      {"title": "Tidak sama sekali", "payload": "stata81"},
+                      {"title": "Sedikit", "payload": "stata82"},
+                      {"title": "Lumayan", "payload": "stata83"},
+                      {"title": "Sangat", "payload": "stata84"}
                                             
                       
                   ]) 
@@ -1560,10 +1666,10 @@ class ActionSTAIT9(Action):
           
               
                dispatcher.utter_message(text=message_stait_9,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait91"},
-                      {"title": "Sedikit", "payload": "stait92"},
-                      {"title": "Lumayan", "payload": "stait93"},
-                      {"title": "Sangat", "payload": "stait94"}
+                      {"title": "Tidak sama sekali", "payload": "stata91"},
+                      {"title": "Sedikit", "payload": "stata92"},
+                      {"title": "Lumayan", "payload": "stata93"},
+                      {"title": "Sangat", "payload": "stata94"}
                                             
                       
                   ])   
@@ -1591,10 +1697,140 @@ class ActionSTAIT10(Action):
           
               
                dispatcher.utter_message(text=message_stait_10,buttons=[
-                      {"title": "Tidak sama sekali", "payload": "stait101"},
-                      {"title": "Sedikit", "payload": "stait102"},
-                      {"title": "Lumayan", "payload": "stait103"},
-                      {"title": "Sangat", "payload": "stait104"}
+                      {"title": "Tidak sama sekali", "payload": "stata101"},
+                      {"title": "Sedikit", "payload": "stata102"},
+                      {"title": "Lumayan", "payload": "stata103"},
+                      {"title": "Sangat", "payload": "stata104"}
                                             
                       
                   ]) 
+               
+    class ActionGetInformation(Action):
+        def name(self) -> Text:
+            return "action_intent_information"
+
+        def run(self, dispatcher: CollectingDispatcher,
+                  tracker: Tracker,
+                  domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+             
+                   url ='https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-to-help-ease-anxiety' 
+                   message_anxiety = 'Coba kamu buka link ini '+url
+                   message_closing = 'Apakah kamu terbantu dengan sesi bersama Koncoku?'
+                   dispatcher.utter_message(text=message_anxiety)
+                   dispatcher.utter_message(text=message_closing,buttons=[
+                          {"title": "Ya", "payload": "yaSurvey"},
+                          {"title": "Tidak", "payload": "tidakSurvey"}
+                          
+                
+                      ]) 
+                   
+    class ActionGetKonsultasi(Action):
+         def name(self) -> Text:
+             return "action_intent_konsultasi"
+
+         def run(self, dispatcher: CollectingDispatcher,
+                   tracker: Tracker,
+                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+              
+                    url ='https://ukp.psikologi.ugm.ac.id/' 
+                    message_anxiety = 'Kamu bisa melihat informasi unit konsultasi UGM di  '+url
+                    message_closing = 'Apakah kamu terbantu dengan sesi bersama Koncoku?'
+                    dispatcher.utter_message(text=message_anxiety)
+                    dispatcher.utter_message(text=message_closing,buttons=[
+                           {"title": "Ya", "payload": "yaSurvey"},
+                           {"title": "Tidak", "payload": "tidakSurvey"}
+                           
+                 
+                       ]) 
+                    
+    class ActionSurvey(Action):
+         def name(self) -> Text:
+             return "action_intent_yasurvey"
+
+         def run(self, dispatcher: CollectingDispatcher,
+                   tracker: Tracker,
+                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+              
+             
+                   
+                    message_1 ='Apakah chatbot ini dapat membantu Anda untuk melakukan pemeriksaan dini gejala anxiety?'
+                    dispatcher.utter_message(text=message_1,buttons=[
+                           {"title": "Sangat membantu", "payload": "kkis15"},
+                           {"title": "Membantu", "payload": "kkis14"},
+                           {"title": "Cukup membantu", "payload": "kkis13"},
+                           {"title": "Kurang membantu", "payload": "kkis12"},
+                           {"title": "Tidak membantu", "payload": "kkis11"},
+                 
+                       ])
+    
+    class ActionSurvey2(Action):
+         def name(self) -> Text:
+             return "action_intent_kuisioner2"
+
+         def run(self, dispatcher: CollectingDispatcher,
+                   tracker: Tracker,
+                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+              
+                    
+                    message_id = tracker.latest_message.get("text") 
+                    sender_id =  tracker.sender_id
+                    cekCurrent = ValidateSurvey(sender_id, message_id)
+                    
+                    if cekCurrent == 0:
+                        insertSurvey(sender_id,message_id)
+                    else:
+                        deleteSurvey(sender_id, message_id)
+                        insertSurvey(sender_id,message_id) 
+                   
+                    message_1 ='Apakah chatbot ini mudah digunakan?'
+                    dispatcher.utter_message(text=message_1,buttons=[
+                           {"title": "Sangat mudah", "payload": "kkis25"},
+                           {"title": "Mudah", "payload": "kkis24"},
+                           {"title": "Cukup mudah", "payload": "kkis23"},
+                           {"title": "Kurang mudah", "payload": "kkis22"},
+                           {"title": "Tidak mudah", "payload": "kkis21"},
+                 
+                       ])
+                    
+    class ActionSurvey3(Action):
+          def name(self) -> Text:
+              return "action_intent_kuisioner3"
+
+          def run(self, dispatcher: CollectingDispatcher,
+                    tracker: Tracker,
+                    domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+               
+                     
+                     message_id = tracker.latest_message.get("text") 
+                     sender_id =  tracker.sender_id
+                     cekCurrent = ValidateSurvey(sender_id, message_id)
+                     
+                     if cekCurrent == 0:
+                         insertSurvey(sender_id,message_id)
+                     else:
+                         deleteSurvey(sender_id, message_id)
+                         insertSurvey(sender_id,message_id) 
+                    
+                     message_1 ='Apakah anda mau merekomendasikan chatbot ini ke teman-teman?'
+                     dispatcher.utter_message(text=message_1,buttons=[
+                            {"title": "Sangat mau ", "payload": "kkis35"},
+                            {"title": "Mau", "payload": "kkis34"},
+                            {"title": "Cukup mau", "payload": "kkis33"},
+                            {"title": "Kurang mau", "payload": "kkis32"},
+                            {"title": "Tidak mau", "payload": "kkis31"},
+                  
+                        ])
+                     
+    class ActionTidakSurvey(Action):
+          def name(self) -> Text:
+              return "action_intent_tidaksurvey"
+
+          def run(self, dispatcher: CollectingDispatcher,
+                    tracker: Tracker,
+                    domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+               
+              
+                    
+                     message_1 ='Terima kasih, salam sehat selalu... God bless you'
+                     dispatcher.utter_message(text=message_1)
+     
