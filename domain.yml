@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 
 intents:
   - greet
@@ -21,8 +21,6 @@ intents:
   - batalformdata
   - submitformdata
   - dass
-  - gad7
-  - stait
   - mulaidass
   - dass1
   - dass2
@@ -38,7 +36,17 @@ intents:
   - dass12
   - dass13
   - dass14
-   - stait
+  - gad
+  - mulaigad
+  - gad1
+  - gad2
+  - gad3
+  - gadthree
+  - gad4
+  - gad5
+  - gad6
+  - gad7
+  - stait
   - startstait
   - stait1
   - stait2
@@ -50,6 +58,13 @@ intents:
   - stait8
   - stait9
   - stait10
+  - information
+  - konsultasi
+  - yaSurvey
+  - tidakSurvey
+  - kuisioner1
+  - kuisioner2
+  - kuisioner3
   
 
 entities:
@@ -131,8 +146,6 @@ actions:
  - action_intent_submitformdata
  - action_intent_batalformdata
  - action_intent_dass
- - action_intent_gad7
- - action_intent_stait
  - action_intent_great
  - action_intent_sad
  - action_intent_dass1
@@ -150,7 +163,16 @@ actions:
  - action_intent_dass13
  - action_intent_dass14
  - action_intent_dassClose
-  - action_intent_stait
+ - action_intent_gadClose
+ - action_intent_gad
+ - action_intent_gad1
+ - action_intent_gad2
+ - action_intent_gad3
+ - action_intent_gad4
+ - action_intent_gad5
+ - action_intent_gad6
+ - action_intent_gad7
+ - action_intent_stait
  - action_intent_stait1
  - action_intent_stait2
  - action_intent_stait3
@@ -161,9 +183,14 @@ actions:
  - action_intent_stait8
  - action_intent_stait9
  - action_intent_stait10
+ - action_intent_information
+ - action_intent_konsultasi
+ - action_intent_tidaksurvey
+ - action_intent_yasurvey
+ - action_intent_kuisioner2
+ - action_intent_kuisioner3
  
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: false
-
