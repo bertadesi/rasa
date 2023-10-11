@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 
 stories:
 
@@ -110,14 +110,100 @@ stories:
   
 - story: cek level GAD-7
   steps: 
-  - intent: gad7
+  - intent: gad
+  - action: action_intent_gad
+  
+- story: GAD 1
+  steps: 
+  - intent: mulaigad
+  - action: action_intent_gad1
+  
+- story: GAD 2
+  steps: 
+  - intent: gad1
+  - action: action_intent_gad2
+  
+- story: GAD 3
+  steps: 
+  - intent: gad2
+  - action: action_intent_gad3
+  
+- story: GAD 4
+  steps: 
+  - intent: gadthree
+  - action: action_intent_gad4
+
+- story: GAD 5
+  steps: 
+  - intent: gad4
+  - action: action_intent_gad5
+  
+- story: GAD 6
+  steps: 
+  - intent: gad5
+  - action: action_intent_gad6
+  
+- story: GAD 7
+  steps: 
+  - intent: gad6
   - action: action_intent_gad7
+  
+
   
 - story: cek level stait/stais
   steps: 
   - intent: stait
   - action: action_intent_stait
   
+- story: Stait 1
+  steps: 
+  - intent: startstait
+  - action: action_intent_stait1
+  
+- story: Stait 2
+  steps: 
+  - intent: stait1
+  - action: action_intent_stait2
+
+- story: Stait 3
+  steps: 
+  - intent: stait2
+  - action: action_intent_stait3  
+  
+- story: Stait 4
+  steps: 
+  - intent: stait3
+  - action: action_intent_stait4
+  
+- story: Stait 5
+  steps: 
+  - intent: stait4
+  - action: action_intent_stait5
+  
+- story: Stait 6
+  steps: 
+  - intent: stait5
+  - action: action_intent_stait6
+  
+- story: Stait 7
+  steps: 
+  - intent: stait6
+  - action: action_intent_stait7
+  
+- story: Stait 8
+  steps: 
+  - intent: stait7
+  - action: action_intent_stait8
+  
+- story: Stait 9
+  steps: 
+  - intent: stait8
+  - action: action_intent_stait9
+  
+- story: Stait 10
+  steps: 
+  - intent: stait9
+  - action: action_intent_stait10
 
 - story: cek curhat seneng
   steps: 
@@ -140,9 +226,39 @@ stories:
   
 - story: get information
   steps:
-  - intent: inform
-  - action: action_intent_inform
+  - intent: information
+  - action: action_intent_information
   
+  
+- story: get info konsultasi
+  steps:
+  - intent: konsultasi
+  - action: action_intent_konsultasi
+  
+- story: get survey
+  steps:
+  - intent: yaSurvey
+  - action: action_intent_yasurvey
+  
+  
+- story: kuisioner 2
+  steps:
+  - intent: kuisioner1
+  - action: action_intent_kuisioner2
+  
+
+- story: kuisioner 3
+  steps:
+  - intent: kuisioner2
+  - action: action_intent_kuisioner3  
+  
+
+- story: no survey
+  steps:
+  - intent: tidakSurvey
+  - action: action_intent_tidaksurvey
+
+
 - story: user form data
   steps:
   - intent: formdata
@@ -157,6 +273,6 @@ stories:
   steps:
   - intent: batalformdata
   - action: action_intent_batalformdata 
-     
-
+  
+  
 
