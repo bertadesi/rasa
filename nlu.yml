@@ -45,16 +45,6 @@ nlu:
     - ayo
     - sehat
    
-
-- intent: general
-  examples: |
-    - /general
-    - tidak
-    - tdk
-    - emoh
-    - ogah
-    
-
 - intent: submitformdata
   examples: |
     - /submitformdata
@@ -73,6 +63,16 @@ nlu:
     - /formdata
     - isi data
     - formulir
+    
+    
+- intent: general
+  examples: |
+    - /general
+    - tidak
+    - tdk
+    - emoh
+    - ogah
+    
 
 - intent: anxietylevel
   examples: |
@@ -274,85 +274,205 @@ nlu:
   examples: |
     - /stait
     - stait
-    - stais
-    - stait/stais
+    - stait
+
         
 - intent: startstait
   examples: |
-    - /mulaistait
-    - mulai stait
+    - /startstait
     - start stait
+    - startstait
     
 - intent: stait1
   examples: |
-    - stait11
-    - stait12
-    - stait13
-    - stait14
+    - stata11
+    - stata11
+    - stata11
+    - stata11
+    - stata12
+    - stata12
+    - stata12
+    - stata12
+    - stata13
+    - stata13
+    - stata13
+    - stata13
+    - stata14
+    - stata14
+    - stata14
+    - stata14
     
 - intent: stait2
   examples: |
-    - stait21
-    - stait22
-    - stait23
-    - stait24
-        
+    - stata21
+    - stata21
+    - stata21
+    - stata21
+    - stata22
+    - stata22
+    - stata22
+    - stata22
+    - stata23
+    - stata23
+    - stata23
+    - stata23
+    - stata24
+    - stata24
+    - stata24
+    - stata24
 
 - intent: stait3
   examples: |
-    - stait31
-    - stait32
-    - stait33
-    - stait34
+    - stata31
+    - stata31
+    - stata31
+    - stata31
+    - stata32
+    - stata32
+    - stata32
+    - stata32
+    - stata33
+    - stata33
+    - stata33
+    - stata33
+    - stata34
+    - stata34
+    - stata34
+    - stata34
 
 - intent: stait4
   examples: |
-    - stait41
-    - stait42
-    - stait43
-    - stait44
+    - stata41
+    - stata41
+    - stata41
+    - stata41
+    - stata42
+    - stata42
+    - stata42
+    - stata42
+    - stata43
+    - stata43
+    - stata43
+    - stata43
+    - stata44
+    - stata44
+    - stata44
+    - stata44
 
 - intent: stait5
   examples: |
-    - stait51
-    - stait52
-    - stait53
-    - stait54
+    - stata51
+    - stata51
+    - stata51
+    - stata51
+    - stata52
+    - stata52
+    - stata52
+    - stata52
+    - stata53
+    - stata53
+    - stata53
+    - stata53
+    - stata54
+    - stata54
+    - stata54
+    - stata54
 
 - intent: stait6
   examples: |
-    - stait61
-    - stait62
-    - stait63
-    - stait64
+    - stata61
+    - stata61
+    - stata61
+    - stata61
+    - stata62
+    - stata62
+    - stata62
+    - stata62
+    - stata63
+    - stata63
+    - stata63
+    - stata63
+    - stata64
+    - stata64
+    - stata64
+    - stata64
 
 - intent: stait7
   examples: |
-    - stait71
-    - stait72
-    - stait73
-    - stait74
+    - stata71
+    - stata71
+    - stata71
+    - stata71
+    - stata72
+    - stata72
+    - stata72
+    - stata72
+    - stata73
+    - stata73
+    - stata73
+    - stata73
+    - stata74
+    - stata74
+    - stata74
+    - stata74
 
 - intent: stait8
   examples: |
-    - stait81
-    - stait82
-    - stait83
-    - stait84
+    - stata81
+    - stata81
+    - stata81
+    - stata81
+    - stata82
+    - stata82
+    - stata82
+    - stata82
+    - stata83
+    - stata83
+    - stata83
+    - stata83
+    - stata84
+    - stata84
+    - stata84
+    - stata84
 
 - intent: stait9
   examples: |
-    - stait91
-    - stait92
-    - stait93
-    - stait94
+    - stata91
+    - stata91
+    - stata91
+    - stata91
+    - stata92
+    - stata92
+    - stata92
+    - stata92
+    - stata93
+    - stata93
+    - stata93
+    - stata93
+    - stata94
+    - stata94
+    - stata94
+    - stata94
 
 - intent: stait10
   examples: |
-    - stait101
-    - stait102
-    - stait103
-    - stait104
+    - stata101
+    - stata101
+    - stata101
+    - stata101
+    - stata102
+    - stata102
+    - stata102
+    - stata102
+    - stata103
+    - stata103
+    - stata103
+    - stata103
+    - stata104
+    - stata104
+    - stata104
+    - stata104
+
 
     
 
@@ -491,4 +611,106 @@ nlu:
     - Boleh kenalan? Siapa namanya?
     - kenalan yuk
     
-
+- intent: information
+  examples: |
+    - artikel
+    - informasi
+    - info
+    - jurnal
+    - guidance
+    - lihat artikel
+    
+- intent: konsultasi
+  examples: |
+    - jadwal
+    - psikolog
+    - dokter
+    - klinik
+    - konsultasi
+    
+- intent: yaSurvey
+  examples: |
+    - yaSurvey
+    - yaSurvey
+    - ya survey
+    - ya survey
+    - yaSurvey
+    
+- intent: tidakSurvey
+  examples: |
+    - tidakSurvey
+    - tidakSurvey
+    - tidak survey
+    - tidak survey
+    - tidakSurvey
+    
+- intent: kuisioner1
+  examples: |
+    - kkis15
+    - kkis15
+    - kkis15
+    - kkis15
+    - kkis14
+    - kkis14
+    - kkis14
+    - kkis14
+    - kkis13
+    - kkis13
+    - kkis13
+    - kkis13
+    - kkis12
+    - kkis12
+    - kkis12
+    - kkis12
+    - kkis11
+    - kkis11
+    - kkis11
+    - kkis11
+    
+    
+- intent: kuisioner2
+  examples: |
+    - kkis25
+    - kkis25
+    - kkis25
+    - kkis25
+    - kkis24
+    - kkis24
+    - kkis24
+    - kkis24
+    - kkis23
+    - kkis23
+    - kkis23
+    - kkis23
+    - kkis22
+    - kkis22
+    - kkis22
+    - kkis22
+    - kkis21
+    - kkis21
+    - kkis21
+    - kkis21
+    
+    
+- intent: kuisioner3
+  examples: |
+    - kkis35
+    - kkis35
+    - kkis35
+    - kkis35
+    - kkis34
+    - kkis34
+    - kkis34
+    - kkis34
+    - kkis33
+    - kkis33
+    - kkis33
+    - kkis33
+    - kkis32
+    - kkis32
+    - kkis32
+    - kkis32
+    - kkis31
+    - kkis31
+    - kkis31
+    - kkis31
