@@ -11,15 +11,11 @@ intents:
   - self_introduction
   - health
   - general
-  - games
   - jokes
   - inform
   - asksymptom
   - anxietylevel
   - curhat
-  - formdata
-  - batalformdata
-  - submitformdata
   - dass
   - mulaidass
   - dass1
@@ -65,6 +61,8 @@ intents:
   - kuisioner1
   - kuisioner2
   - kuisioner3
+  - thankyou
+  - masukan
   
 
 entities:
@@ -117,7 +115,7 @@ responses:
   - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye-bye, have a nice day"
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
@@ -137,7 +135,6 @@ actions:
  - action_hello_world
  - action_health_greet
  - action_intent_general
- - action_intent_games
  - action_intent_jokes
  - action_intent_inform
  - action_intent_anxietylevel
@@ -189,6 +186,9 @@ actions:
  - action_intent_yasurvey
  - action_intent_kuisioner2
  - action_intent_kuisioner3
+ - action_intent_closingsurvey
+ - action_intent_input
+
  
 
 session_config:
