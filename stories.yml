@@ -14,10 +14,7 @@ stories:
   steps:
   - intent: general
   - action: action_intent_general 
-- story: check topic games 
-  steps: 
-  - intent: games
-  - action: action_intent_games
+
 - story: check topic jokes
   steps: 
   - intent: jokes
@@ -252,6 +249,11 @@ stories:
   - intent: kuisioner2
   - action: action_intent_kuisioner3  
   
+- story: Closing Survey
+  steps:
+  - intent: kuisioner3
+  - action: action_intent_closingsurvey 
+  
 
 - story: no survey
   steps:
@@ -259,20 +261,14 @@ stories:
   - action: action_intent_tidaksurvey
 
 
-- story: user form data
-  steps:
-  - intent: formdata
-  - action: action_intent_formdata
- 
-- story: submit form data
-  steps:
-  - intent: submitformdata
-  - action: action_intent_submitformdata  
 
-- story: batal form data
+  
+- story: thank you
   steps:
-  - intent: batalformdata
-  - action: action_intent_batalformdata 
+  - intent: thankyou
+  - action: action_intent_yasurvey
   
-  
-
+- story: input
+  steps:
+  - intent: masukan
+  - action: action_intent_input
