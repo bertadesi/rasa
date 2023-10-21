@@ -50,7 +50,7 @@ except configparser.Error as e:
 
 
 
-intent_greet = "Apa kabar hari ini? Salam dari Koncomu ini adalah layanan konsultasi Psikologi gratis untuk pemeriksaan dini mandiri. Tertarik untuk cek-cek dulu?"
+intent_greet = "Apa kabar hari ini? Salam dari Koncomu ini adalah layanan konsultasi Psikologi gratis untuk membantu mendapatkan gambaran umum apakah kamu mengalami anxiety disorder atau tidak. Semua hasil harus diverifikasi lagi pada Unit Konsultasi Psikologi, atau Psikolog ya.Tertarik untuk cek-cek dulu?"
 intent_general = "Ga papa kalo belum tertarik. next time ya "
 intent_health_greet = "Nah, terima kasih udah mau lihat-lihat dulu. Kamu lagi pengen ngapain nih? Pilih salah satu ya."
 intent_jokes ="this page is intended to be blank...(lol) ini bener nya maksudnya ga ada ide"
@@ -157,7 +157,37 @@ def insertSurvey(sender_id,code_measurement):
                # Execute an INSERT query to save the feedback
         cursor = conn.cursor()
         cursor.execute("INSERT INTO survey (session_id, components,score)"
-                              "VALUES  (%s, %s, %s, %s)", (sender_id,code_measurement,score))
+                              "VALUES  (%s, %s, %s)", (sender_id,code_measurement,score))
+        conn.commit()
+   
+   
+    except mysql.connector.Error as err:
+            
+               print(err)
+   
+    finally:
+               # Close the database connection
+              if 'cursor' in locals():
+                 cursor.close()
+              if 'conn' in locals():
+                 conn.close()
+
+      
+    return None
+
+
+def insertCurhat(sender_id,text,is_anxiety):
+   
+    try:
+            
+ 
+     # Create a connection
+               
+        print('curhat')
+               # Execute an INSERT query to save the feedback
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO result (session_id, symptom,is_anxiety)"
+                              "VALUES  (%s, %s, %s)", (sender_id,text,is_anxiety))
         conn.commit()
    
    
@@ -217,7 +247,7 @@ def deleteMeasurement(sender_id,code_measurement):
     
         code = code_measurement[:-1]      
         print(code)
-        query1 = "delete from survey  where session_id='" + sender_id+ "' and code_measurement like'%"+code +"%'"
+        query1 = "delete from measurement  where session_id='" + sender_id+ "' and code_measurement like'%"+code +"%'"
        
  
      # Create a connection
@@ -263,9 +293,9 @@ def ValidateMeasurement(sender_id,code_measurement):
                 query2 = " and code_measurement like '%"+  code+"%'"   
         else:
        
-                
+                code = code_measurement[:-1]  
                 query1="SELECT count(*) FROM measurement WHERE type_measurement='STAIT5'"
-                query2 = " and code_measurement ="+  code_measurement    
+                query2 = " and code_measurement like '%"+  code+"%'"   
  
      # Create a connection
         cursor = conn.cursor()       
@@ -345,12 +375,13 @@ def countMeasurement(sender_id,code_measurement):
                 query1="SELECT sum(score) FROM measurement where type_measurement='GAD7' and session_id='"+ sender_id+"'"
                 
            
-        else:
+        elif 'stata' in code_measurement:
        
                 query1="SELECT sum(score) FROM measurement where type_measurement='STAIT5' and session_id='"+ sender_id+"'"
                 
-   
+        else:
        
+                query1="SELECT sum(score) FROM measurement where session_id='"+ sender_id+"'"
  
      # Create a connection
                
@@ -529,7 +560,8 @@ class ActionIntentGeneral(Action):
                 # Close the database connection
                 if 'cursor' in locals():
                    cursor.close()
-               
+        quote=''
+        author=''
 
         if response.status_code == 200:
             data = response.json()
@@ -538,7 +570,8 @@ class ActionIntentGeneral(Action):
             print(f"Random Quote: '{quote}' - {author}")
         else:
             print("Failed to retrieve a random quote.")
-        dispatcher.utter_message(text=quote+" by "+author)
+        
+        dispatcher.utter_message(text=quote+"  "+author)
         dispatcher.utter_message(text=intent_general+" "+result_string+" salam sehat selalu :) tetep semangat")
 
 class ActionIntentJokes(Action):
@@ -687,19 +720,54 @@ class ActionCheckCurhatSedih(Action):
               domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
          
           message_id = tracker.latest_message.get("text") 
-          
+          sender_id =  tracker.sender_id
           
           print(message_id)
+          message2 = "Tapi kalo mau cek level cemasmu kamu bisa ketik: anxietylevel"
+          cekCount = countMeasurement(sender_id, '')
              
           is_anxiety=SBERTModel(message_id)
-          if is_anxiety=='Y':
-              
-             message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk konsultasi atau baca2 artikel tentang hal ini'
           
+          if cekCount ==0:
+              if is_anxiety=='Y':
+                  
+                 insertCurhat(sender_id, message_id, is_anxiety)
+                 message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk konsultasi atau baca2 artikel tentang hal ini'
+                 message3 ='Tips mengatasi gejala cemas: latihan pernafasan (Seperti yoga, meditasi), jaga pola makan, tidur yang cukup, jika masih merasa cemas, harus konsultasi ke PSikolog. Jangan disimpen sendiri dan dibiarin ya'
+                
+                 dispatcher.utter_message(text=message+" ")
+                 dispatcher.utter_message(text=message3+" ")
+                 dispatcher.utter_message(text=message2+" ")
+                 
+              else:
+                 insertCurhat(sender_id, message_id, is_anxiety)
+                 message ='Walaupun moodmu lagi ga bagus tapi sepertinya kamu tidak mengalami gejala cemas berlebih. Tapi ada baiknya kamu cek level cemasmu ya, kamu bisa ketik:anxietylevel' 
+                 dispatcher.utter_message(text=message+" ")
+              
+              
           else:
-             message ='Dari hasil cek tadi memang benar skornya diatas rata-rata, tetapi kemungkinan itu hanya kondisi sesaat saja' 
-            
-          dispatcher.utter_message(text=message+" ")
+              
+              
+              if is_anxiety=='Y':
+                  
+                 insertCurhat(sender_id, message_id, is_anxiety)
+                 message ='oh sepertinya kamu terdeteksi sedang mengalami gejala kecemasan berlebih, ada baiknya untuk konsultasi atau baca2 artikel tentang hal ini. '
+                 message3 ='Tips mengatasi gejala cemas: latihan pernafasan (Seperti yoga, meditasi), jaga pola makan, tidur yang cukup, jika masih merasa cemas, harus konsultasi ke PSikolog. Jangan disimpen sendiri dan dibiarin ya'
+                 message2='Bisa ketik : psikolog atau artikel, untuk info lebih lanjut ya'
+                 dispatcher.utter_message(text=message+" ")
+                 dispatcher.utter_message(text=message3+" ")
+                 dispatcher.utter_message(text=message2+" ")
+                 
+              else:
+                 insertCurhat(sender_id, message_id, is_anxiety)
+                 message ='Dari hasil cek tadi memang benar skor level cemas diatas rata-rata, tetapi kemungkinan itu hanya kondisi sesaat saja' 
+                 message2='Tertarik untuk baca-baca info? Bisa ketik: psikolog atau artikel, untuk info lebih lanjut ya'
+                 message3 ='Tips mengatasi gejala cemas: latihan pernafasan (Seperti yoga, meditasi), jaga pola makan, tidur yang cukup, jika masih merasa cemas, harus konsultasi ke PSikolog. Jangan disimpen sendiri dan dibiarin ya'
+                
+                 dispatcher.utter_message(text=message+" ")
+                 dispatcher.utter_message(text=message3+" ")
+                 dispatcher.utter_message(text=message2+" ")
+              
           
           
 class ActionCheckCurhatSeneng(Action):
@@ -720,26 +788,26 @@ class ActionCheckCurhatSeneng(Action):
          model = SentenceTransformer(modules=[word_embedding_model, pooling_model, dense_model])
     
          input_text = message_id
-         reference_texts = ["Mengalami peningkatan nafsu makan yang luar biasa! Makanan favorit kamu jadi lebih enak.",
-                   "Tidurku semakin nyenyak dan pulas setiap malam. Bangun dengan semangat baru setiap pagi!",
-                   "kamu merasa penuh energi dan semangat setiap hari. Tidak ada rasa lelah yang mengganggu!",
-                   "Kemampuan kamu dalam berkonsentrasi dan membuat keputusan semakin baik. kamu merasa sangat fokus!",
-                   "kamu merasa tenang dan bahagia setiap hari. Tidak ada rasa cemas atau gelisah yang mengganggu pikiran kamu.",
-                   "Kehidupan kamu penuh kebahagiaan dan tidak ada ruang untuk serangan panik. kamu merasa kuat!",
-                   "Tubuh kamu terasa segar dan sehat. Tidak ada perubahan fisik yang perlu dikhawatirkan.",
-                   "kamu memiliki pikiran positif dan hanya ingin menjalani kehidupan dengan penuh kebahagiaan dan harapan."]
+        
+         
+         df = pd.read_csv('data/dataset_happy.csv')
+         reference_texts = df['comment'].tolist()
+
          input_embedding = model.encode([input_text])[0]
          reference_embeddings = model.encode(reference_texts)
-    
+
          similarity_scores = cosine_similarity([input_embedding], reference_embeddings)[0]
          sorted_indices = np.argsort(similarity_scores)[::-1]
-    
+         
              # Retrieve the original texts based on the sorted indices
          sorted_texts = [reference_texts[i] for i in sorted_indices]
          print(sorted_texts[0]) 
+         message1 = sorted_texts[0]
+         message2 = "Salam dari KoncoKu selalu ya, tapi kalo mau cek level cemasmu kamu bisa ketik: anxietylevel"
             
          
-         dispatcher.utter_message(text=sorted_texts[0])
+         dispatcher.utter_message(text=message1)
+         dispatcher.utter_message(text=message2)
                      
     
           
@@ -1755,11 +1823,11 @@ class ActionSTAIT10(Action):
                    
                     message_1 ='Apakah chatbot ini dapat membantu Anda untuk melakukan pemeriksaan dini gejala anxiety?'
                     dispatcher.utter_message(text=message_1,buttons=[
-                           {"title": "Sangat membantu", "payload": "kkis15"},
-                           {"title": "Membantu", "payload": "kkis14"},
-                           {"title": "Cukup membantu", "payload": "kkis13"},
-                           {"title": "Kurang membantu", "payload": "kkis12"},
-                           {"title": "Tidak membantu", "payload": "kkis11"},
+                           {"title": "Sangat membantu", "payload": "quizioner15"},
+                           {"title": "Membantu", "payload": "quizioner14"},
+                           {"title": "Cukup membantu", "payload": "quizioner13"},
+                           {"title": "Kurang membantu", "payload": "quizioner12"},
+                           {"title": "Tidak membantu", "payload": "quizioner11"},
                  
                        ])
     
@@ -1784,11 +1852,11 @@ class ActionSTAIT10(Action):
                    
                     message_1 ='Apakah chatbot ini mudah digunakan?'
                     dispatcher.utter_message(text=message_1,buttons=[
-                           {"title": "Sangat mudah", "payload": "kkis25"},
-                           {"title": "Mudah", "payload": "kkis24"},
-                           {"title": "Cukup mudah", "payload": "kkis23"},
-                           {"title": "Kurang mudah", "payload": "kkis22"},
-                           {"title": "Tidak mudah", "payload": "kkis21"},
+                           {"title": "Sangat mudah", "payload": "quizioner25"},
+                           {"title": "Mudah", "payload": "quizioner24"},
+                           {"title": "Cukup mudah", "payload": "quizioner23"},
+                           {"title": "Kurang mudah", "payload": "quizioner22"},
+                           {"title": "Tidak mudah", "payload": "quizioner21"},
                  
                        ])
                     
@@ -1813,13 +1881,38 @@ class ActionSTAIT10(Action):
                     
                      message_1 ='Apakah anda mau merekomendasikan chatbot ini ke teman-teman?'
                      dispatcher.utter_message(text=message_1,buttons=[
-                            {"title": "Sangat mau ", "payload": "kkis35"},
-                            {"title": "Mau", "payload": "kkis34"},
-                            {"title": "Cukup mau", "payload": "kkis33"},
-                            {"title": "Kurang mau", "payload": "kkis32"},
-                            {"title": "Tidak mau", "payload": "kkis31"},
+                            {"title": "Sangat mau ", "payload": "quizioner35"},
+                            {"title": "Mau", "payload": "quizioner34"},
+                            {"title": "Cukup mau", "payload": "quizioner33"},
+                            {"title": "Kurang mau", "payload": "quizioner32"},
+                            {"title": "Tidak mau", "payload": "quizioner31"},
                   
                         ])
+                     
+                     
+    
+    
+    class ActionSurveyClosing(Action):
+          def name(self) -> Text:
+              return "action_intent_closingsurvey"
+
+          def run(self, dispatcher: CollectingDispatcher,
+                    tracker: Tracker,
+                    domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+               
+                     
+                     message_id = tracker.latest_message.get("text") 
+                     sender_id =  tracker.sender_id
+                     cekCurrent = ValidateSurvey(sender_id, message_id)
+                     
+                     if cekCurrent == 0:
+                         insertSurvey(sender_id,message_id)
+                     else:
+                         deleteSurvey(sender_id, message_id)
+                         insertSurvey(sender_id,message_id) 
+                    
+                     message_1 ='Terima kasih atas feedbacknya. Semoga Koncoku bisa membantu ya jaga kesehatan sampai jumpa dilain waktu'
+                     dispatcher.utter_message(text=message_1)
                      
     class ActionTidakSurvey(Action):
           def name(self) -> Text:
@@ -1833,4 +1926,34 @@ class ActionSTAIT10(Action):
                     
                      message_1 ='Terima kasih, salam sehat selalu... God bless you'
                      dispatcher.utter_message(text=message_1)
+                     
+                     
+    class ActionInput(Action):
+          def name(self) -> Text:
+              return "action_intent_input"
+
+          def run(self, dispatcher: CollectingDispatcher,
+                    tracker: Tracker,
+                    domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+               
+                    message_id = tracker.latest_message.get("text") 
+                    sender_id =  tracker.sender_id
+                    is_anxiety='Input'
+                    
+                    insertCurhat(sender_id, message_id, is_anxiety)
+                    message_1 ='Terima kasih atas masukannya, salam sehat selalu... God bless you'
+                    dispatcher.utter_message(text=message_1)
      
+    class ActionFallback(Action):
+              def name(self) -> Text:
+                  return "action_default_fallback"
+
+              def run(self, dispatcher: CollectingDispatcher,
+                        tracker: Tracker,
+                        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+                   
+                  
+                        
+                         message_1 ='Nah, Koncoku belum ngerti nih maksudnya apa. Kamu bisa sampaikan langsung ke pemiliknya: https://wa.me/6281915548083, thank you'
+                         dispatcher.utter_message(text=message_1)
+         
