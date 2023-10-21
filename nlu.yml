@@ -19,22 +19,6 @@ nlu:
     - great
     - /start
 
-    
-- intent: games
-  examples: |
-    - /games
-    - games
-    - play
-    - main
-    - dota
-
-- intent: jokes
-  examples: |
-    - /jokes
-    - fun
-    - gojek
-    - canda
-    - humor
 
 - intent: health
   examples: |
@@ -44,26 +28,7 @@ nlu:
     - iya
     - ayo
     - sehat
-   
-- intent: submitformdata
-  examples: |
-    - /submitformdata
-    - submit
-    - kumpulkan
-    
-    
-- intent: batalformdata
-  examples: |
-    - /batalformdata
-    - batal
-    - tidak jadi
-    
-- intent: formdata
-  examples: |
-    - /formdata
-    - isi data
-    - formulir
-    
+     
     
 - intent: general
   examples: |
@@ -488,7 +453,7 @@ nlu:
     - good afternoon
     - cu
     - good by
-    - cee you later
+    - see you later
     - good night
     - bye
     - goodbye
@@ -497,6 +462,14 @@ nlu:
     - bye bye
     - see you later
     - yoh ati2 ya
+    - wokay
+    - sip
+    - sami-sami
+    - siap
+    - sama-sama
+    - you are welcome
+    - wokei
+  
 
 - intent: affirm
   examples: |
@@ -596,6 +569,12 @@ nlu:
     - ga bisa tidur
     - deg-deg an terus
     - sangat sedih
+    - lelah
+    - kelelahan
+    - mental breakdown
+    - empty
+    - kosong
+
 
 - intent: bot_challenge
   examples: |
@@ -646,71 +625,90 @@ nlu:
     
 - intent: kuisioner1
   examples: |
-    - kkis15
-    - kkis15
-    - kkis15
-    - kkis15
-    - kkis14
-    - kkis14
-    - kkis14
-    - kkis14
-    - kkis13
-    - kkis13
-    - kkis13
-    - kkis13
-    - kkis12
-    - kkis12
-    - kkis12
-    - kkis12
-    - kkis11
-    - kkis11
-    - kkis11
-    - kkis11
+    - quizioner15
+    - quizioner15
+    - quizioner15
+    - quizioner15
+    - quizioner14
+    - quizioner14
+    - quizioner14
+    - quizioner14
+    - quizioner13
+    - quizioner13
+    - quizioner13
+    - quizioner13
+    - quizioner12
+    - quizioner12
+    - quizioner12
+    - quizioner12
+    - quizioner11
+    - quizioner11
+    - quizioner11
+    - quizioner11
     
     
 - intent: kuisioner2
   examples: |
-    - kkis25
-    - kkis25
-    - kkis25
-    - kkis25
-    - kkis24
-    - kkis24
-    - kkis24
-    - kkis24
-    - kkis23
-    - kkis23
-    - kkis23
-    - kkis23
-    - kkis22
-    - kkis22
-    - kkis22
-    - kkis22
-    - kkis21
-    - kkis21
-    - kkis21
-    - kkis21
+    - quizioner25
+    - quizioner25
+    - quizioner25
+    - quizioner25
+    - quizioner24
+    - quizioner24
+    - quizioner24
+    - quizioner24
+    - quizioner23
+    - quizioner23
+    - quizioner23
+    - quizioner23
+    - quizioner22
+    - quizioner22
+    - quizioner22
+    - quizioner22
+    - quizioner21
+    - quizioner21
+    - quizioner21
+    - quizioner21
     
     
 - intent: kuisioner3
   examples: |
-    - kkis35
-    - kkis35
-    - kkis35
-    - kkis35
-    - kkis34
-    - kkis34
-    - kkis34
-    - kkis34
-    - kkis33
-    - kkis33
-    - kkis33
-    - kkis33
-    - kkis32
-    - kkis32
-    - kkis32
-    - kkis32
-    - kkis31
-    - kkis31
-    - kkis31
-    - kkis31
+    - quizioner35
+    - quizioner35
+    - quizioner35
+    - quizioner35
+    - quizioner34
+    - quizioner34
+    - quizioner34
+    - quizioner34
+    - quizioner33
+    - quizioner33
+    - quizioner33
+    - quizioner33
+    - quizioner32
+    - quizioner32
+    - quizioner32
+    - quizioner32
+    - quizioner31
+    - quizioner31
+    - quizioner31
+    - quizioner31
+    
+- intent: thankyou
+  examples: |
+    - okay thanks
+    - thanks
+    - thank you
+    - terima kasih
+    - nuhun
+    - ok
+
+- intent: masukan
+  examples: |
+    - misalkan
+    - seumpama
+    - tambahan
+    - kalo ada tambahan
+    - Apa boleh   
+    - sebaiknya
+    - seandainya
